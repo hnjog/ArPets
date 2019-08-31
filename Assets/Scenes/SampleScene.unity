@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44300658, g: 0.4921953, b: 0.57192475, a: 1}
+  m_IndirectSpecularColor: {r: 0.44300634, g: 0.49219513, b: 0.5719244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -332,7 +332,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 9, z: -10, w: 8}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -359,7 +359,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 741910354}
-  - component: {fileID: 741910356}
+  - component: {fileID: 741910355}
   m_Layer: 8
   m_Name: BelugaAxis
   m_TagString: Untagged
@@ -382,7 +382,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &741910356
+--- !u!114 &741910355
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -391,11 +391,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 741910353}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 932620924254f5b4ea948d3fa72f6330, type: 3}
+  m_Script: {fileID: 11500000, guid: cf6825ac637af2944b6990ed4e866fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   veluga_Ani: {fileID: 857671453}
-  startPos: {fileID: 517076740}
   lookChecker: {fileID: 302207507}
 --- !u!1 &800618836
 GameObject:
