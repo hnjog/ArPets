@@ -6,27 +6,52 @@ using UnityEngine;
 
 public class AIEmotionController : AI
 {
-	// 벨루가 감정표현에 사용될 머테리얼들
+	// 벨루가 감정표현에 사용될 텍스쳐들
 	[SerializeField]
-	Material[] emotionMate = new Material[4];
+	Texture[] emotionMate = new Texture[4];               // 0 : 기분 좋음, 1: 보통, 2: 화남, 3: 매우 화남
 
-	// 행복도와 만복도에 따른 감정 변화
-	// ... 유저가 공놀이 같은 것만 해서 만복도는 낮고, 행복도만 높은 상황은? - 각 상태는 단계적인 영향을 받음
-	// 그러므로 화남 - 매우 화남 상태가 아니라면 만복도의 영향을 받지 않고
-	// 행복도가 급격히 높아진다고 해서 행복 상태로 바로 가는 것도 아님
-	IEnumerator EChange()
+    [SerializeField]
+    Renderer velugaRenderer;                                    // 벨루가 표정
+
+    private void Start()
+    {
+        StartCoroutine(EChange());
+    }
+
+    private void Update()
+    {
+
+        //velugaRenderer.material.mainTexture = emotionMate[0];
+    }
+
+    // 행복도와 만복도에 따른 감정 변화
+    IEnumerator EChange()
 	{
 		while (true)
 		{
-			if(happiness >= 70)
+            //일반 상태에서 행복도 70이상 일 시 기분 좋음 상태로
+			if(happiness >= 70 && veluga_Emotion == Chara_Emotion.emotion_Idle)
 			{
 				veluga_Emotion = Chara_Emotion.emotion_Happy;
 			}
-			else if(happiness >= 30)
+            //화남 상태에서 행복도 30 이상이거나, 기분 좋은 상태에서 행복도 69 이하일시 일반 상태
+			else if((happiness >= 30 && veluga_Emotion == Chara_Emotion.emotion_Angry)
+                 || (happiness <= 69 && veluga_Emotion == Chara_Emotion.emotion_Happy))
 			{
 				veluga_Emotion = Chara_Emotion.emotion_Idle;
 			}
-			else if(happiness >= 25)
+            //매우 화남 상태에서 행복도 25이상, 만복도 10 이상이거나, 일반 상태에서 행복도 29 일시 화남 상태
+			else if((happiness >= 25 && foodPoint >= 10 && veluga_Emotion == Chara_Emotion.emotion_VeryAngry)
+                 || (happiness <= 29 && veluga_Emotion == Chara_Emotion.emotion_Idle))
+            {
+                veluga_Emotion = Chara_Emotion.emotion_Angry;
+            }
+            //화남 상태에서 행복도 24이하, 만복도 9이하시 매우 화남 상태
+            else if(happiness <= 24 && foodPoint <= 9 && veluga_Emotion == Chara_Emotion.emotion_Angry)
+            {
+                veluga_Emotion = Chara_Emotion.emotion_VeryAngry;
+            }
+
 			yield return null;
 		}
 	}

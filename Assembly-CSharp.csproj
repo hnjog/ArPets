@@ -62,9 +62,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\blade_SampleCode\Unity_for_Blade_Sample_Code_v2\sample_code\AdditionalSamples.cs" />
+    <Compile Include="Assets\blade_SampleCode\Unity_for_Blade_Sample_Code_v2\sample_code\Vibration.cs" />
+    <Compile Include="Assets\blade_SampleCode\Unity_for_Blade_Sample_Code_v2\sample_code\VInput.cs" />
     <Compile Include="Assets\Scripts\AI.cs" />
+    <Compile Include="Assets\Scripts\AIEmotionController.cs" />
+    <Compile Include="Assets\Scripts\AIMoveController.cs" />
+    <Compile Include="Assets\Scripts\AIStateController.cs" />
     <Compile Include="Assets\Scripts\BasicAI.cs" />
     <Compile Include="Assets\Scripts\CameraScript.cs" />
+    <Compile Include="Assets\Scripts\InputCheck.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/Hun/OWYO/ArPet/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
