@@ -417,12 +417,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   veluga_Ani: {fileID: 0}
   lookChecker: {fileID: 0}
-  emotionMate:
-  - {fileID: 2800000, guid: cdc8c04b64c615148afb4877b2b7a8c9, type: 3}
-  - {fileID: 2800000, guid: 2c5263b7f3ced4140a1214bdf5ffcc96, type: 3}
+  veluga_Face:
   - {fileID: 0}
   - {fileID: 0}
-  velugaRenderer: {fileID: 411478609}
+  - {fileID: 0}
+  - {fileID: 0}
+  veluga_Renderer: {fileID: 411478609}
 --- !u!1 &800618836
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,6 +470,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: -5746924871116331410, guid: 91f3691204250e6418c58d167d5d4fc1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -5339355619053426210, guid: 91f3691204250e6418c58d167d5d4fc1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -1560911038469288088, guid: 91f3691204250e6418c58d167d5d4fc1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7f20f00345396ab49933680a10555e69, type: 2}
     - target: {fileID: -7986249860330243914, guid: 91f3691204250e6418c58d167d5d4fc1,
         type: 3}
       propertyPath: m_Layer
@@ -510,17 +525,7 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -5746924871116331410, guid: 91f3691204250e6418c58d167d5d4fc1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: -5485188412469033001, guid: 91f3691204250e6418c58d167d5d4fc1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: -5339355619053426210, guid: 91f3691204250e6418c58d167d5d4fc1,
         type: 3}
       propertyPath: m_Layer
       value: 8
@@ -610,11 +615,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: -1560911038469288088, guid: 91f3691204250e6418c58d167d5d4fc1,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 7f20f00345396ab49933680a10555e69, type: 2}
     - target: {fileID: 1320719423933838456, guid: 91f3691204250e6418c58d167d5d4fc1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y

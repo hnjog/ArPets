@@ -8,20 +8,15 @@ public class AIEmotionController : AI
 {
 	// 벨루가 감정표현에 사용될 텍스쳐들
 	[SerializeField]
-	Texture[] emotionMate = new Texture[4];               // 0 : 기분 좋음, 1: 보통, 2: 화남, 3: 매우 화남
+	Texture[] veluga_Face = new Texture[4];               // 0 : 기분 좋음, 1: 보통, 2: 화남, 3: 매우 화남
 
     [SerializeField]
-    Renderer velugaRenderer;                                    // 벨루가 표정
+    Renderer veluga_Renderer;                             // 벨루가 표정 렌더러
 
     private void Start()
     {
         StartCoroutine(EChange());
-    }
-
-    private void Update()
-    {
-
-        //velugaRenderer.material.mainTexture = emotionMate[0];
+        StartCoroutine(FChange());
     }
 
     // 행복도와 만복도에 따른 감정 변화
@@ -55,4 +50,34 @@ public class AIEmotionController : AI
 			yield return null;
 		}
 	}
+
+    // 감정에 따른 표정 변화
+    IEnumerator FChange()
+    {
+        while(true)
+        {
+            // 감정이 작동할 때(즉 기본 상태일때)
+            if(veluga_State == Chara_State.state_Idle)
+            {
+                if(veluga_Emotion == Chara_Emotion.emotion_Happy)
+                {
+                    veluga_Renderer.material.mainTexture = veluga_Face[0];      
+                }
+                else if(veluga_Emotion == Chara_Emotion.emotion_Idle)
+                {
+                    veluga_Renderer.material.mainTexture = veluga_Face[1];
+                }
+                else if (veluga_Emotion == Chara_Emotion.emotion_Angry)
+                {
+                    veluga_Renderer.material.mainTexture = veluga_Face[2];
+                }
+                else if (veluga_Emotion == Chara_Emotion.emotion_VeryAngry)
+                {
+                    veluga_Renderer.material.mainTexture = veluga_Face[3];
+                }
+            }
+
+            yield return null;
+        }
+    }
 }

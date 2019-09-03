@@ -87,13 +87,13 @@ public static class VInput {
 
 	public static void Update (float dt) {
 		#if UNITY_EDITOR
-			// This is a simple input setup to run the game in the unity editor. 
-			// WSAD for swipes, QE for two-finger horizontal swipes, 
-			// Left/Right click for tap, and 2-finger tap, and ESC for the 1-second hold. 
+			// This is a simple input setup to run the game in the unity editor.
+			// WSAD for swipes, QE for two-finger horizontal swipes,
+			// Left/Right click for tap, and 2-finger tap, and ESC for the 1-second hold.
 			_tap1F = Input.GetMouseButtonDown(0);
 			_tap2F = Input.GetMouseButtonDown(1);
-			_swipeBackward1F = Input.GetKeyDown(KeyCode.A) ;
-			_swipeForward1F = Input.GetKeyDown(KeyCode.D) ;
+			_swipeBackward1F = Input.GetKeyDown(KeyCode.A);
+			_swipeForward1F = Input.GetKeyDown(KeyCode.D);
 			_swipeUp1F = Input.GetKeyDown(KeyCode.W);
 			_swipeDown1F = Input.GetKeyDown(KeyCode.S);
 			_swipeBackward2F = Input.GetKeyDown(KeyCode.Q);

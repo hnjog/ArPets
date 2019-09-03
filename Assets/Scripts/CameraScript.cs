@@ -10,8 +10,6 @@ using UnityEngine.UI;
 // 그렇게 할 경우 카메라가 다시 중앙으로 이동되게 되지 않을까(중앙으로 왔다리 갔다리)
 // y축의 경우 한바퀴 돌때 이상하게 조정되는 경우가 있으므로 카메라 rotation을 돌려줄때 0으로 초기화 시켜주는 방식은?
 
-
-
 public class CameraScript : MonoBehaviour
 {
     // 디버깅용

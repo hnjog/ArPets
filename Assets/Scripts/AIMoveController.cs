@@ -11,8 +11,25 @@ using UnityEngine;
 
 public class AIMoveController : AI
 {
+    [Header("bool 변수")]
+    bool isMoving = false;            // 업데이트로 움직이게 하는 용도의 bool 변수
+    bool isReturning = false;         // 리턴용 변수
+    //bool isLookMe = true;                     // 카메라가 나를 보고 있는가
 
-	void Start()
+    [Header("속도 관련")]
+    float moSpeed = 1.5f;                     // 이동 스피드
+    float roSpeed = 0.01f;                    // 회전 스피드
+
+    [Header("위치 조정용")]
+    [SerializeField]
+    Transform lookChecker;                    // 카메라와 일정거리 이상 떨어져 있는가
+    float distance;                           // 거리
+
+    [Header("쿼터니언 값 조정")]
+    int qx = 0;                               // x 쿼터니언               
+    int qy = 0;                               // y 쿼터니언
+
+    void Start()
 	{
 		// 반복 코루틴을 통해 업데이트문을 과하게 사용하지 않음
 		StartCoroutine(TestAI());
@@ -22,7 +39,7 @@ public class AIMoveController : AI
 	//순차적으로 변하는 것만 사용. 조금씩 이동, 회전 하는 등
 	void Update()
 	{
-		if (veluga_MoveState != Chara_Move.notWork)	// 벨루가가 기본 상태일때만 작동하도록. notwork 상태로 만드는 것은 State 스크립트에서 다룰 것
+		if (veluga_State == Chara_State.state_Idle)	// 벨루가가 기본 상태일때만 작동하도록. notwork 상태로 만드는 것은 State 스크립트에서 다룰 것
 		{
 			//이동 
 			if (isMoving)
