@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // AI 감정 관련 스크립트
+// 기본 상태에서만 작동하도록 한다.
+// 표정만 관리(텍스쳐 교체)
 
 public class AIEmotionController : AI
 {
