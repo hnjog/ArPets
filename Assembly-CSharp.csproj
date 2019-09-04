@@ -72,6 +72,39 @@
     <Compile Include="Assets\Scripts\BasicAI.cs" />
     <Compile Include="Assets\Scripts\CameraScript.cs" />
     <Compile Include="Assets\Scripts\InputCheck.cs" />
+    <Compile Include="Assets\Wikitude\Dependencies\Platform.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\CameraSettingsController.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\ContinuousRecognitionController.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\ExtendedImageTrackingController.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\ExtendedObjectTrackingController.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\InputPlugin\CustomCameraController.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\InputPlugin\CustomCameraRenderer.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\InputPlugin\SimpleInputPluginController.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\InstantTracking\DockUI.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\InstantTracking\GridRenderer.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\InstantTracking\InstantTrackingController.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\InstantTracking\LoadInstantTarget.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\InstantTracking\MoveController.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\InstantTracking\PlaneRenderer.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\InstantTracking\SaveInstantTarget.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\InstantTracking\ScaleController.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\InstantTracking\SceneDescription.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\InstantTracking\ScenePickingController.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\InstantTracking\ToastController.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\MenuController.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\MultipleTargets\Dinosaur.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\MultipleTargets\MultipleTargetsController.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\MultipleTrackersController.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\ObjectTrackingController.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\PluginController.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\RuntimeTrackerController.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\SampleController.cs" />
+    <Compile Include="Assets\Wikitude\Samples\Scripts\SingleRecognitionController.cs" />
+    <None Include="Assets\Wikitude\Samples\Shaders\TransparentShadowReceiver.shader" />
+    <None Include="Assets\Wikitude\Dependencies\link.xml" />
+    <None Include="Assets\Wikitude\Samples\Shaders\OccluderShader.shader" />
+    <None Include="Assets\Wikitude\Samples\Shaders\TransparentTextureColor.shader" />
+    <None Include="Assets\Wikitude\Samples\Shaders\ScanEffect.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/Hun/OWYO/ArPet/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -269,6 +302,18 @@
     </Reference>
     <Reference Include="UnityEngine.XRModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="WikitudeBridge">
+      <HintPath>D:/Hun/OWYO/ArPet/Assets/Wikitude/Dependencies/WikitudeBridge.dll</HintPath>
+    </Reference>
+    <Reference Include="WikitudeUnityPlugin">
+      <HintPath>D:/Hun/OWYO/ArPet/Assets/Wikitude/Dependencies/WikitudeUnityPlugin.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsEditorBridge">
+      <HintPath>D:/Hun/OWYO/ArPet/Assets/Wikitude/Dependencies/WindowsEditorBridge.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.unity">
+      <HintPath>D:/Hun/OWYO/ArPet/Assets/Wikitude/Samples/Scripts/zxing.unity.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.0f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
