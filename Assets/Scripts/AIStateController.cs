@@ -22,16 +22,16 @@ public class AIStateController : AI
     [SerializeField]
     GameObject food;
 
-    // 먹이주기
+    // 먹이주기, UI 메뉴에서 사용될 예정
     void Feed()
     {
-
+        veluga_State = Chara_State.state_Eat;
     }
 
     // 공놀이
     void Ball()
     {
-
+        veluga_State = Chara_State.state_Ball;
     }
 
     // 상태 변화

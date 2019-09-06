@@ -342,7 +342,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 3e-45, z: 3.362e-42, w: 1.05e-43}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -487,8 +487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13b36bedb02b3940b8b3a5118f946bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: {fileID: 1853509265}
-  startPos: {fileID: 800618837}
+  wikiCamera: {fileID: 0}
 --- !u!1 &977411715
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,7 +843,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 34
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -1136,5 +1135,10 @@ PrefabInstance:
       propertyPath: lookChecker
       value: 
       objectReference: {fileID: 302207507}
+    - target: {fileID: 8897936873469373758, guid: e712339936603c74cad8534de2edf815,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e712339936603c74cad8534de2edf815, type: 3}
