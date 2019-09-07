@@ -62,7 +62,12 @@ public enum VINPUT_EVENT{
 public static class VInput {
 	public delegate void onVInput(VINPUT_EVENT pEvent);
 	public static event onVInput onVInputEvent;
-	public static void dispatchVInputEvent(VINPUT_EVENT pEvent){ if(onVInputEvent != null) onVInputEvent(pEvent); }
+
+	public static void dispatchVInputEvent(VINPUT_EVENT pEvent)
+    {
+        if (onVInputEvent != null)
+            onVInputEvent(pEvent);
+    }
 
 	private static bool _tap1F= false;
 	private static bool _tap2F= false;
