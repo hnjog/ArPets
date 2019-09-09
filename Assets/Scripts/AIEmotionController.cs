@@ -13,7 +13,7 @@ public class AIEmotionController : AI
 	Texture[] veluga_Face = new Texture[4];               // 0 : 기분 좋음, 1: 보통, 2: 화남, 3: 매우 화남
 
     [SerializeField]
-    Renderer veluga_Renderer;                             // 벨루가 표정 렌더러
+    Renderer veluga_Renderer = null;                             // 벨루가 표정 렌더러
 
     private void Start()
     {

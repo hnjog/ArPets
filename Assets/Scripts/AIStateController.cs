@@ -19,10 +19,6 @@ public class AIStateController : AI
     Renderer veluga_SRenderer;                             // 벨루가 표정 렌더러
 
     [Header("공놀이, 먹이주기관련 변수")]
-    [SerializeField]
-    GameObject ballPrefab;                                 // 공 프리팹
-    [SerializeField]
-    GameObject foodPrefab;                                 // 먹이 프리팹
     bool isDoingBall = false;                              // 공놀이 중
     bool isDoingFeed = false;                              // 먹이 먹는 중
 
@@ -98,10 +94,13 @@ public class AIStateController : AI
 
     }
 
-    // 먹이주기 메서드
+    // 먹이주기 함수, 오브젝트 매니저와 연계됨. 다만
+    // 던진 후에 생성하는 작업이 따로 필요함.
     void PlayFeed()
     {
-
+        //게임 오브젝트 꺼내오고, 위치 수정
+        GameObject f_object = ObjectManager.instance.F_Expert();
+        f_object.transform.position = Vector3.zero;
     }
 
     // 배고픔 상태 일시 사용될 코루틴

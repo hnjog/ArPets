@@ -22,7 +22,7 @@ public class AIMoveController : AI
 
     [Header("위치 조정용")]
     [SerializeField]
-    Transform lookChecker;                    // 카메라와 일정거리 이상 떨어져 있는가
+    Transform lookChecker = null;                    // 카메라와 일정거리 이상 떨어져 있는가
     float distance;                           // 거리
 
     [Header("쿼터니언 값 조정")]

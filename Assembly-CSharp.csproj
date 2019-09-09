@@ -71,8 +71,10 @@
     <Compile Include="Assets\Scripts\AIStateController.cs" />
     <Compile Include="Assets\Scripts\BasicAI.cs" />
     <Compile Include="Assets\Scripts\CameraScript.cs" />
+    <Compile Include="Assets\Scripts\Food.cs" />
     <Compile Include="Assets\Scripts\InputCheck.cs" />
-    <Compile Include="Assets\Scripts\PosCheck.cs" />
+    <Compile Include="Assets\Scripts\ObjectManager.cs" />
+    <Compile Include="Assets\Scripts\UInput.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/hnjog/OneDrive/Desktop/OWYO/ArPets/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

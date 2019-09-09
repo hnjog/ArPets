@@ -19,7 +19,7 @@ public class CameraScript : MonoBehaviour
     Vector3 cameraPos;
 
     [SerializeField]
-    Transform startPos;
+    Transform startPos = null;
 
     // cameraturning 함수가 1번만 사용되게 
     //bool checkerX = true;                   
@@ -49,7 +49,7 @@ public class CameraScript : MonoBehaviour
 
 
 
-        debug.text = Input.gyro.rotationRateUnbiased.x + "\n" + Input.gyro.rotationRateUnbiased.y + "\n" + transform.eulerAngles + "\n" + transform.position;
+        //debug.text = Input.gyro.rotationRateUnbiased.x + "\n" + Input.gyro.rotationRateUnbiased.y + "\n" + transform.eulerAngles + "\n" + transform.position;
     }
 
     // 카메라 위치 초기화 - 갑작스러운 무언가에 대비하려 했으나 잠시 생각좀
