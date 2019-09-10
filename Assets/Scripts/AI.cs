@@ -15,6 +15,9 @@ public class AI : MonoBehaviour
     [Range(0, 100)]
     protected int foodPoint = 50;                       // 만복도 (기본수치 50, 최소 0, 최대 100)
 
+    static public int success = 0;                      //  성공 횟수 (먹이, 공놀이 성공 횟수)
+    static public int fail = 0;                         //  실패 횟수 (먹이, 실패횟수)
+
     // 여러 가지 상태들(기본 상태가 아닐 경우엔 관련 표정 텍스쳐도 이쪽에서 관리해야 할듯) - AIStateController 에서 주로 사용
     protected enum Chara_State
     {

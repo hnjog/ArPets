@@ -5,6 +5,8 @@ ScriptsOnlyBuild:
     - AIMoveController
     - BasicAI
     - CameraScript
+    - Food
+    - ObjectManager
     - UInput
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
@@ -42,6 +44,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 54
+      Script: {instanceID: 0}
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
@@ -67,7 +71,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10238}
     - Class: 114
+      Script: {instanceID: 10258}
+    - Class: 114
       Script: {instanceID: 10394}
+    - Class: 114
+      Script: {instanceID: 10750}
     - Class: 114
       Script: {instanceID: 10752}
     - Class: 114
@@ -273,7 +281,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 78f6588e4c0359804648d449b74eb4fe
+      Hash: 5f61f827e6a4cb57da30fd7dc3584890
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ObjectManager
@@ -495,7 +503,7 @@ ScriptsOnlyBuild:
     className: BaseInput
   - hash:
       serializedVersion: 2
-      Hash: 44bfa119ce7e9d02532925fa684526dc
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CameraScript
@@ -574,4 +582,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/Pets.unity
-  playerPath: C:/Users/hnjog/OneDrive/Desktop/OWYO/testAr.apk
+  playerPath: D:/OWYO/testPet.apk

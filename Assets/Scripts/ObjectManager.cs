@@ -11,6 +11,7 @@ public class ObjectManager : MonoBehaviour
 
     [SerializeField]
     GameObject ob_Food = null;                      // 먹이용 프리팹
+    [SerializeField]
     GameObject ob_Ball = null;                      // 공 프리팹
 
     public Queue<GameObject> q_Food = new Queue<GameObject>();   //먹이용 큐
@@ -26,6 +27,7 @@ public class ObjectManager : MonoBehaviour
             //위치와 각도는 변경 가능
             GameObject f_object = Instantiate(ob_Food, Vector3.zero, Quaternion.identity);
             q_Food.Enqueue(f_object);
+            f_object.transform.SetParent(transform);
             f_object.SetActive(false);
         }
 
@@ -37,6 +39,7 @@ public class ObjectManager : MonoBehaviour
     public void F_Recovery(GameObject r_object)
     {
         q_Food.Enqueue(r_object);
+        r_object.transform.position = transform.position;
         r_object.SetActive(false);
     }
 
@@ -51,6 +54,7 @@ public class ObjectManager : MonoBehaviour
     // 볼 끄기
     public void B_Off(GameObject r_object)
     {
+        r_object.transform.position = transform.position;
         r_object.SetActive(false);
     }
 

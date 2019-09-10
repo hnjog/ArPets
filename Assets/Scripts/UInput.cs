@@ -10,6 +10,15 @@ public class UInput : MonoBehaviour
 {
     public Text text;
 
+    // UI 상태
+    public enum UIState
+    {
+        Idle,
+        Feed,
+        Ball
+    }
+
+    public static UIState uIState = UIState.Idle;
 
     private void Start()
     {
@@ -32,6 +41,9 @@ public class UInput : MonoBehaviour
                 // back or cancel. 
                 break;
             case VINPUT_EVENT.SWIPE_FORWARD_1FINGER:
+                GameObject f_object = ObjectManager.instance.F_Expert();
+                f_object.transform.position = Vector3.zero;
+                f_object.transform.rotation = transform.rotation;
                 // scroll right through menu. 
                 break;
             case VINPUT_EVENT.SWIPE_BACKWARD_1FINGER:
