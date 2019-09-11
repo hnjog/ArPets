@@ -40,12 +40,14 @@ public class AIStateController : AI
     void UIBall()
     {
         veluga_State = Chara_State.state_Ball;
+        UInput.uIState = UInput.UIState.Ball;
     }
 
-    // 먹이주기, UI 메뉴에서 사용될 예정
+    // 먹이주기, UI 에서 사용될 예정
     void UIFeed()
     {
         veluga_State = Chara_State.state_Eat;
+        UInput.uIState = UInput.UIState.Feed;
     }
 
 
@@ -60,12 +62,12 @@ public class AIStateController : AI
                 // 공놀이
                 if (veluga_State == Chara_State.state_Ball)
                 {
-                    PlayBall();
+                    StartCoroutine(State_Ball());
                 }
                 // 먹이주기
                 else if (veluga_State == Chara_State.state_Eat)
                 {
-                    PlayFeed();
+                    StartCoroutine(State_Feed());
                 }
                 // 행복도 상승
                 else if (isHappy)
@@ -88,19 +90,19 @@ public class AIStateController : AI
         }
     }
 
-    // 공놀이 메서드
-    void PlayBall()
+    
+    IEnumerator State_Ball()
     {
-
+        // 관련 애니메이션
+        yield return new WaitForSeconds(3f);
+        veluga_State = Chara_State.state_Idle;
     }
 
-    // 먹이주기 함수, 오브젝트 매니저와 연계됨. 다만
-    // 던진 후에 생성하는 작업이 따로 필요함.
-    void PlayFeed()
+    IEnumerator State_Feed()
     {
-        //게임 오브젝트 꺼내오고, 위치 수정
-        GameObject f_object = ObjectManager.instance.F_Expert();
-        f_object.transform.position = Vector3.zero;
+        // 관련 애니메이션
+        yield return new WaitForSeconds(3f);
+        veluga_State = Chara_State.state_Idle;
     }
 
     // 배고픔 상태 일시 사용될 코루틴
@@ -162,11 +164,5 @@ public class AIStateController : AI
             yield return null;
     }
 
-    // 1분에 만복도 10 감소
-    IEnumerator HungerIsComing()
-    {
-        
-        yield return new WaitForSecondsRealtime(60f);
-        foodPoint -= 10;
-    }
+    
 }

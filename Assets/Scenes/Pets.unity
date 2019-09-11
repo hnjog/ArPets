@@ -253,7 +253,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.1022723e-36, y: 4.366e-42, z: 0, w: 1.0245358e+27}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -413,6 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1853509265}
+  cal: {fileID: 0}
 --- !u!1 &977411715
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,16 +452,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8453730994908269383, guid: 4ef8285bcd591b84a8b85d9aec4ee979,
-        type: 3}
-      propertyPath: m_Name
-      value: Fish
-      objectReference: {fileID: 0}
-    - target: {fileID: 8453730994908269383, guid: 4ef8285bcd591b84a8b85d9aec4ee979,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4830944391979956564, guid: 4ef8285bcd591b84a8b85d9aec4ee979,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -516,8 +507,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8453730994908269383, guid: 4ef8285bcd591b84a8b85d9aec4ee979,
+        type: 3}
+      propertyPath: m_Name
+      value: Fish
+      objectReference: {fileID: 0}
+    - target: {fileID: 8453730994908269383, guid: 4ef8285bcd591b84a8b85d9aec4ee979,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ef8285bcd591b84a8b85d9aec4ee979, type: 3}
+--- !u!1 &1179935367 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4931769096478413216, guid: 1490f2f47386bef4ca5d21aac4eb671a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3985902048213583543}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1179935368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179935367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f80e3c9b41d4b340a1164da7c70481f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1219288782
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,16 +909,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 977411716}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 515f1b893ce650942980a67617696dbf,
-        type: 3}
-      propertyPath: m_Name
-      value: Pet1
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 515f1b893ce650942980a67617696dbf,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 515f1b893ce650942980a67617696dbf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -960,6 +969,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d8b3bd533faa2494893de4fa038d5b07, type: 2}
+    - target: {fileID: -927199367670048503, guid: 515f1b893ce650942980a67617696dbf,
+        type: 3}
+      propertyPath: m_Name
+      value: Pet1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 515f1b893ce650942980a67617696dbf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 515f1b893ce650942980a67617696dbf, type: 3}
 --- !u!1 &1988898806 stripped
@@ -1024,6 +1043,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3744146284814646800, guid: e712339936603c74cad8534de2edf815,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3744146284814646801, guid: e712339936603c74cad8534de2edf815,
         type: 3}
       propertyPath: m_Name
@@ -1094,11 +1118,6 @@ PrefabInstance:
       propertyPath: lookChecker
       value: 
       objectReference: {fileID: 302207507}
-    - target: {fileID: 3744146284814646800, guid: e712339936603c74cad8534de2edf815,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e712339936603c74cad8534de2edf815, type: 3}
 --- !u!1001 &3985902048213583543

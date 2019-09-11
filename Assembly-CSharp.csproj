@@ -62,20 +62,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\blade_SampleCode\Unity_for_Blade_Sample_Code_v2\sample_code\AdditionalSamples.cs" />
-    <Compile Include="Assets\blade_SampleCode\Unity_for_Blade_Sample_Code_v2\sample_code\Vibration.cs" />
-    <Compile Include="Assets\blade_SampleCode\Unity_for_Blade_Sample_Code_v2\sample_code\VInput.cs" />
     <Compile Include="Assets\Scripts\AI.cs" />
     <Compile Include="Assets\Scripts\AIEmotionController.cs" />
     <Compile Include="Assets\Scripts\AIMoveController.cs" />
     <Compile Include="Assets\Scripts\AIStateController.cs" />
+    <Compile Include="Assets\Scripts\Ball.cs" />
     <Compile Include="Assets\Scripts\BasicAI.cs" />
     <Compile Include="Assets\Scripts\CameraScript.cs" />
     <Compile Include="Assets\Scripts\Food.cs" />
     <Compile Include="Assets\Scripts\InputCheck.cs" />
     <Compile Include="Assets\Scripts\ObjectManager.cs" />
-    <Compile Include="Assets\Scripts\StatusController.cs" />
+    <Compile Include="Assets\Scripts\StatusCal.cs" />
     <Compile Include="Assets\Scripts\UInput.cs" />
+    <Compile Include="Assets\Scripts\VInput.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/OWYO/ArPets/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
