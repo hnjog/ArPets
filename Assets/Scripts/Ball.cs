@@ -6,6 +6,8 @@ using UnityEngine;
 // 유저가 던지고 받아칠 때 보는 방향으로 날아간다. (또한 공 파괴 가능 시간이 초기화 됨)
 // 벨루가를 만나면 유저를 향해서 공을 날림
 // 타이밍에 맞추어?? 친다.
+// 벨루가가 공에 맞게 되면, 유저 쪽으로 팅겨나오면서 코루틴이 멈추며,
+// 유저가 공을 다시 받아치면 코루틴을 새로 시작한다.(단, 유저가 공을 못받는 경우가 필요함)
 
 public class Ball : MonoBehaviour
 {
@@ -14,9 +16,11 @@ public class Ball : MonoBehaviour
     GameObject tf = null;                   // 던지는 곳
     GameObject player = null;               // 플레이어
     GameObject veluga = null;               // 벨루가
-    
+
+    IEnumerator ballCorutine;
 
     Vector3 BallVelo;                       // 방향
+    float degree = 30f;                     // 공 던지는 각도
 
     // 작동 될 때
     private void OnEnable()
@@ -31,18 +35,24 @@ public class Ball : MonoBehaviour
 
         // off 한 후의 힘 초기화
         b_rigid.velocity = Vector3.zero;
-        BallVelo = Throwing(transform.position, tf.transform.position, 45f);
+        BallVelo = Throwing(transform.position, tf.transform.position, degree);
         Throw(BallVelo);
 
-        StartCoroutine(DestroyFood());
+        ballCorutine = DestroyBall();
+        StartCoroutine(ballCorutine);
     }
 
-    // 받아치는 함수
+    // 받아치는 함수, 타이밍 등의 조건 추가 예정임.(타이밍에 맞게 치지 못한 경우, fail 카운트가 늘어나 실패로 규정이 됨)
     public void Rebound()
     {
         b_rigid.velocity = Vector3.zero;
-        BallVelo = Throwing(transform.position, tf.transform.position, 45f);
+        BallVelo = Throwing(transform.position, tf.transform.position, degree);
         Throw(BallVelo);
+        AI.success += 1;
+
+        // 코루틴 초기화
+        
+        StartCoroutine(ballCorutine);
     }
 
     private void OnCollisionEnter(Collision other)
@@ -51,19 +61,19 @@ public class Ball : MonoBehaviour
         if (other.gameObject.tag == "Pet")
         {
             b_rigid.velocity = Vector3.zero;
-            BallVelo = Throwing(veluga.transform.position, player.transform.position, 45f);
+            BallVelo = Throwing(veluga.transform.position, player.transform.position, degree);                 // 벨루가가 플레이어에게 볼을 던짐
             Throw(BallVelo);
-            AI.success += 1;
+            StopCoroutine(ballCorutine);
         }
     }
 
     // x초 뒤에 사라짐(유저가 먹이를 벨루가에게 못 준 경우)
-    IEnumerator DestroyFood()
+    IEnumerator DestroyBall()
     {
         if (gameObject.activeSelf)
         {
             yield return new WaitForSeconds(5f);
-            ObjectManager.instance.F_Recovery(gameObject);
+            ObjectManager.instance.B_Recovery(gameObject);
             AI.fail += 1;
         }
         else

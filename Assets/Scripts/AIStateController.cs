@@ -37,19 +37,24 @@ public class AIStateController : AI
     }
 
     // 공놀이 선택
-    void UIBall()
+    public void UIBall()
     {
         veluga_State = Chara_State.state_Ball;
         UInput.uIState = UInput.UIState.Ball;
     }
 
     // 먹이주기, UI 에서 사용될 예정
-    void UIFeed()
+    public void UIFeed()
     {
         veluga_State = Chara_State.state_Eat;
         UInput.uIState = UInput.UIState.Feed;
     }
 
+    public void UICancel()
+    {
+        veluga_State = Chara_State.state_Idle;
+        UInput.uIState = UInput.UIState.Idle;
+    }
 
     // 상태 변화
     IEnumerator StateChange()

@@ -11,6 +11,8 @@ public class Food : MonoBehaviour
 
     GameObject tf = null;                   // 던지는 곳
 
+    float degree = 30f;                     // 공 던지는 각도
+
     // 작동 될 때
     private void OnEnable()
     {
@@ -22,7 +24,7 @@ public class Food : MonoBehaviour
 
         // off 한 후의 힘 초기화
         f_rigid.velocity = Vector3.zero;
-        Vector3 foodVelo = Throwing(transform.position, tf.transform.position, 45f);
+        Vector3 foodVelo = Throwing(transform.position, tf.transform.position, degree);
         Throw(foodVelo);
 
         StartCoroutine(DestroyFood());
