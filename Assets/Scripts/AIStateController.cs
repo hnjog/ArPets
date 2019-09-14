@@ -50,8 +50,15 @@ public class AIStateController : AI
         UInput.uIState = UInput.UIState.Feed;
     }
 
+    public void UIIdle()
+    {
+        veluga_State = Chara_State.state_Idle;
+        UInput.uIState = UInput.UIState.Idle;
+    }
+
     public void UICancel()
     {
+        success = fail = 0;
         veluga_State = Chara_State.state_Idle;
         UInput.uIState = UInput.UIState.Idle;
     }
@@ -65,17 +72,17 @@ public class AIStateController : AI
             if (!isDoingBall || !isDoingFeed)
             {
                 // 공놀이
-                if (veluga_State == Chara_State.state_Ball)
-                {
-                    StartCoroutine(State_Ball());
-                }
-                // 먹이주기
-                else if (veluga_State == Chara_State.state_Eat)
-                {
-                    StartCoroutine(State_Feed());
-                }
+                //if (veluga_State == Chara_State.state_Ball)
+                //{
+                //    StartCoroutine(State_Ball());
+                //}
+                //// 먹이주기
+                //else if (veluga_State == Chara_State.state_Eat)
+                //{
+                //    StartCoroutine(State_Feed());
+                //}
                 // 행복도 상승
-                else if (isHappy)
+                if (isHappy)
                 {
                     StartCoroutine(State_Happy());
                 }
@@ -100,14 +107,14 @@ public class AIStateController : AI
     {
         // 관련 애니메이션
         yield return new WaitForSeconds(3f);
-        veluga_State = Chara_State.state_Idle;
+        //veluga_State = Chara_State.state_Idle;
     }
 
     IEnumerator State_Feed()
     {
         // 관련 애니메이션
         yield return new WaitForSeconds(3f);
-        veluga_State = Chara_State.state_Idle;
+        //veluga_State = Chara_State.state_Idle;
     }
 
     // 배고픔 상태 일시 사용될 코루틴

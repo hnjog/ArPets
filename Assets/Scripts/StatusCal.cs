@@ -53,16 +53,16 @@ public class StatusCal : AI
         {
             happiness += (int)(success / 5);
             foodPoint -= (success + fail);
-            UInput.uIState = UInput.UIState.Idle;
-            Save();
         }
         else
         {
             happiness--;
             foodPoint -= (success + fail);
-            UInput.uIState = UInput.UIState.Idle;
-            Save();
         }
+
+        UInput.uIState = UInput.UIState.Idle;
+        UInput.isPlayBall = false;
+        Save();
     }
 
     // 안드로이드 앱 끝날 때 저장

@@ -4,32 +4,49 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // UI 기능 및 vuzix input 확인
-// 이벤트 시스템, 트리거 x
-// 일단 그래픽 레이캐스트를 이용해보자.
+// 먹이 주기 상태일 경우, 메뉴에 먹이는 없게 해야 함.
+// 타이밍을 맞게 치는 경우의 수정이 필요함.
 
 
 public class UInput : MonoBehaviour
 {
     //public Text text;
 
-    [Header("")]
-    public Image iFeed;
+    [Header("메뉴")]
+    [SerializeField] GameObject idle_Menu = null;              // 기본 메뉴
+    [SerializeField] GameObject play_Menu = null;              // 게임 중 메뉴
 
+    [SerializeField] AIStateController aiState = null;         // aistatecontroller
 
+    Animator mAni;                      // 메뉴 애니메이터
+    Animator pmAni;                     // 플레이 중 애니메이터
+
+    [Header(" 메뉴 상태")]
+    byte[] menu = new byte[3] { 0, 1, 2 };
+    byte menu_State = 1;
+    byte pmenu_State = 1;
+
+    public static bool isPlayBall = false;     // 공놀이 중인가
+
+    Ball ballScript;
 
     // UI 상태
     public enum UIState
     {
-        Idle,
-        Feed,
-        Ball,
-        menu
+        Idle,                           // 기본 상태
+        Feed,                           // 먹이 상태
+        Ball,                           // 공놀이 상태
+        menu,                           // 메뉴 상태     (기본 메뉴 -> 먹이, 공놀이)
+        play_m                          // 플레이 중 메뉴(돌아가기, 기본 상태로)
     }
 
     public static UIState uIState = UIState.Idle;
+    UIState back;
 
     private void Start()
     {
+        mAni = idle_Menu.GetComponent<Animator>();
+        pmAni = play_Menu.GetComponent<Animator>();
         VInput.onVInputEvent += _onVInputEvent;
     }
 
@@ -38,154 +55,157 @@ public class UInput : MonoBehaviour
         VInput.Update(Time.unscaledDeltaTime);
     }
 
-    public void feedChanger()
+    // 메뉴 바꿔주는 함수
+    void menuChange()
     {
-
+        if(uIState == UIState.menu)
+        {
+            if(idle_Menu.activeSelf == false)
+            {
+                idle_Menu.SetActive(true);
+            }
+        }
+        else if(uIState == UIState.play_m)
+        {
+            if(play_Menu.activeSelf == false)
+            {
+                play_Menu.SetActive(true);
+            }
+        }
     }
+
+
 
     // UI 상태 별 뷰직스 움직임 제어
     protected virtual void _onVInputEvent(VINPUT_EVENT pEvent)
     {
-        // 먹이줄 때
-        if (uIState == UIState.Feed)
+        
+        switch (pEvent)
         {
-            switch (pEvent)
-            {
-                case VINPUT_EVENT.TAP_1FINGER:                          // 손가락 하나 탭
-                    //메뉴로
-                    break;
-                case VINPUT_EVENT.TAP_2FINGER:                          // 손가락 두 개 탭
-                    
-                    break;
-                case VINPUT_EVENT.SWIPE_FORWARD_1FINGER:                // 손가락 하나로 앞으로 스와이프
-                    PlayFeed();
-                    break;
-                case VINPUT_EVENT.SWIPE_BACKWARD_1FINGER:               // 손가락 하나로 뒤로 스와이프
+            case VINPUT_EVENT.TAP_1FINGER:                          // 손가락 하나 탭
+                if (isPlayBall == false)
+                {
+                    if (uIState == UIState.Idle)
+                    {
+                        uIState = UIState.menu;
 
-                    break;
-                case VINPUT_EVENT.SWIPE_UP_1FINGER:                     // 손가락 하나로 위로 스와이프
+                        mAni.SetTrigger("yu");                          // 메뉴 등장
+                        mAni.SetInteger("Index", 1);                        // 초기 값
+                    }
+                    else if(uIState == UIState.Feed || uIState == UIState.Ball)
+                    {
+                        back = uIState;                                   // 저장
+                        uIState = UIState.play_m;
+                        pmAni.SetTrigger("yu");                           // 메뉴 등장
+                        pmAni.SetInteger("Index", 1);                        // 초기 값
+                    }
+                    else if(uIState == UIState.menu)                         // 메뉴 중에
+                    {
+                        if(menu_State == menu[0])
+                        {
+                            aiState.UIFeed();
+                            mAni.SetTrigger("mu");
+                        }
+                        else if (menu_State == menu[1])
+                        {
+                            aiState.UIIdle();
+                            mAni.SetTrigger("mu");
+                        }
+                        else if (menu_State == menu[2])
+                        {
+                            aiState.UIBall();
+                            mAni.SetTrigger("mu");
+                        }
+                    }
+                    else if(uIState == UIState.play_m)
+                    {
+                        if (pmenu_State == menu[1])
+                        {
+                            uIState = back;
+                            pmAni.SetTrigger("mu");
+                        }
+                        else if (pmenu_State == menu[2])
+                        {
 
-                    break;
-                case VINPUT_EVENT.SWIPE_DOWN_1FINGER:                  // 손가락 하나로 밑으로 스와이프
+                            aiState.UICancel();                                // 캔슬 스크립트
+                            pmAni.SetTrigger("mu");
+                        }
+                    }
 
-                    break;
-                case VINPUT_EVENT.SWIPE_FORWARD_2FINGER:               // 손가락 두 개로 앞으로 스와이프
+                }
+                else
+                {
+                    ballScript.Rebound();                           // 받아치기
+                }
+                break;
+            case VINPUT_EVENT.TAP_2FINGER:                          // 손가락 두 개 탭
+                
+                break;
+            case VINPUT_EVENT.SWIPE_FORWARD_1FINGER:                // 손가락 하나로 앞으로 스와이프
+                if (uIState == UIState.Feed) PlayFeed();
+                else if (uIState == UIState.Ball) StartBall();
+                else if(uIState == UIState.menu)
+                {
+                    // 중앙 메뉴일 때
+                    if(menu_State == menu[1])
+                    {
+                        mAni.SetInteger("Index", 2);                        
+                        menu_State = menu[2];
+                    }
+                    else if(menu_State == menu[0])
+                    {
+                        mAni.SetInteger("Index", 1);
+                        menu_State = menu[1];
+                    }
+                }
+                else if(uIState == UIState.play_m)
+                {
+                    if (pmenu_State == menu[1])
+                    {
+                        pmAni.SetInteger("Index", 2);
+                        pmenu_State = menu[2];
+                    }
+                }
+                break;
+            case VINPUT_EVENT.SWIPE_BACKWARD_1FINGER:               // 손가락 하나로 뒤로 스와이프
+                if(uIState == UIState.menu)
+                {
+                    // 중앙 메뉴일 때
+                    if (menu_State == menu[1])
+                    {
+                        mAni.SetInteger("Index", 0);
+                        menu_State = menu[0];
+                    }
+                    else if (menu_State == menu[2])
+                    {
+                        mAni.SetInteger("Index", 1);
+                        menu_State = menu[1];
+                    }
+                }
+                else if(uIState == UIState.play_m)
+                {
+                    if (pmenu_State == menu[2])
+                    {
+                        mAni.SetInteger("Index", 1);
+                        menu_State = menu[1];
+                    }
+                }
+                break;
+            case VINPUT_EVENT.SWIPE_UP_1FINGER:                     // 손가락 하나로 위로 스와이프
 
-                    break;
-                case VINPUT_EVENT.SWIPE_BACKWARD_2FINGER:              // 손가락 두 개로 앞으로 스와이프
+                break;
+            case VINPUT_EVENT.SWIPE_DOWN_1FINGER:                  // 손가락 하나로 밑으로 스와이프
 
-                    break;
-                case VINPUT_EVENT.HOLD_1FINGER:                        // 손가락 하나 대고 있기
+                break;
+            case VINPUT_EVENT.SWIPE_FORWARD_2FINGER:               // 손가락 두 개로 앞으로 스와이프
 
-                    // open a menu! 
-                    break;
-            }
-        }
-        // 공놀이 때
-        else if (uIState == UIState.Ball)
-        {
-            switch (pEvent)
-            {
-                case VINPUT_EVENT.TAP_1FINGER:                          // 손가락 하나 탭
-                    //메뉴로
-                    //if(공놀이 시작이 이미 된 경우)
-                    // 받아치기로
-                    break;
-                case VINPUT_EVENT.TAP_2FINGER:                          // 손가락 두 개 탭
+                break;
+            case VINPUT_EVENT.SWIPE_BACKWARD_2FINGER:              // 손가락 두 개로 앞으로 스와이프
 
-                    break;
-                case VINPUT_EVENT.SWIPE_FORWARD_1FINGER:                // 손가락 하나로 앞으로 스와이프
-                    StartBall();
-                    break;
-                case VINPUT_EVENT.SWIPE_BACKWARD_1FINGER:               // 손가락 하나로 뒤로 스와이프
-
-                    break;
-                case VINPUT_EVENT.SWIPE_UP_1FINGER:                     // 손가락 하나로 위로 스와이프
-
-                    break;
-                case VINPUT_EVENT.SWIPE_DOWN_1FINGER:                  // 손가락 하나로 밑으로 스와이프
-
-                    break;
-                case VINPUT_EVENT.SWIPE_FORWARD_2FINGER:               // 손가락 두 개로 앞으로 스와이프
-
-                    break;
-                case VINPUT_EVENT.SWIPE_BACKWARD_2FINGER:              // 손가락 두 개로 앞으로 스와이프
-
-                    break;
-                case VINPUT_EVENT.HOLD_1FINGER:                        // 손가락 하나 대고 있기
-
-                    // open a menu! 
-                    break;
-            }
-        }
-        // 평상시에
-        else if (uIState == UIState.Idle)
-        {
-            switch (pEvent)
-            {
-                case VINPUT_EVENT.TAP_1FINGER:                          // 손가락 하나 탭
-                    //메뉴로
-                    break;
-                case VINPUT_EVENT.TAP_2FINGER:                          // 손가락 두 개 탭
-
-                    break;
-                case VINPUT_EVENT.SWIPE_FORWARD_1FINGER:                // 손가락 하나로 앞으로 스와이프
-                    break;
-                case VINPUT_EVENT.SWIPE_BACKWARD_1FINGER:               // 손가락 하나로 뒤로 스와이프
-
-                    break;
-                case VINPUT_EVENT.SWIPE_UP_1FINGER:                     // 손가락 하나로 위로 스와이프
-
-                    break;
-                case VINPUT_EVENT.SWIPE_DOWN_1FINGER:                  // 손가락 하나로 밑으로 스와이프
-
-                    break;
-                case VINPUT_EVENT.SWIPE_FORWARD_2FINGER:               // 손가락 두 개로 앞으로 스와이프
-
-                    break;
-                case VINPUT_EVENT.SWIPE_BACKWARD_2FINGER:              // 손가락 두 개로 앞으로 스와이프
-
-                    break;
-                case VINPUT_EVENT.HOLD_1FINGER:                        // 손가락 하나 대고 있기
-                    Application.Quit();                                // 앱 종료
-                    // open a menu! 
-                    break;
-            }
-        }
-        // 메뉴 중에
-        else
-        {
-            switch (pEvent)
-            {
-                case VINPUT_EVENT.TAP_1FINGER:                          // 손가락 하나 탭
-                    // 메뉴 선택
-                    break;
-                case VINPUT_EVENT.TAP_2FINGER:                          // 손가락 두 개 탭
-
-                    break;
-                case VINPUT_EVENT.SWIPE_FORWARD_1FINGER:                // 손가락 하나로 앞으로 스와이프
-                    // 메뉴 오른쪽
-                    break;
-                case VINPUT_EVENT.SWIPE_BACKWARD_1FINGER:               // 손가락 하나로 뒤로 스와이프
-                    // 메뉴 왼쪽
-                    break;
-                case VINPUT_EVENT.SWIPE_UP_1FINGER:                     // 손가락 하나로 위로 스와이프
-
-                    break;
-                case VINPUT_EVENT.SWIPE_DOWN_1FINGER:                  // 손가락 하나로 밑으로 스와이프
-
-                    break;
-                case VINPUT_EVENT.SWIPE_FORWARD_2FINGER:               // 손가락 두 개로 앞으로 스와이프
-
-                    break;
-                case VINPUT_EVENT.SWIPE_BACKWARD_2FINGER:              // 손가락 두 개로 앞으로 스와이프
-
-                    break;
-                case VINPUT_EVENT.HOLD_1FINGER:                        // 손가락 하나 대고 있기
-
-                    // open a menu! 
-                    break;
-            }
+                break;
+            case VINPUT_EVENT.HOLD_1FINGER:                        // 손가락 하나 대고 있기
+                if (uIState == UIState.Idle) Application.Quit();                                // 앱 종료
+                break;
         }
     }
 
@@ -197,6 +217,8 @@ public class UInput : MonoBehaviour
         {
             GameObject b_object = ObjectManager.instance.B_Expert();
             b_object.transform.position = transform.position;
+            ballScript = b_object.GetComponent<Ball>();
+            isPlayBall = true;
         }
     }
 

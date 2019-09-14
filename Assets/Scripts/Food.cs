@@ -13,6 +13,8 @@ public class Food : MonoBehaviour
 
     float degree = 30f;                     // 공 던지는 각도
 
+    [SerializeField] AIStateController aiState = null;         // aistatecontroller
+
     // 작동 될 때
     private void OnEnable()
     {
@@ -20,6 +22,7 @@ public class Food : MonoBehaviour
         {
             f_rigid = GetComponent<Rigidbody>();
             tf = GameObject.Find("LookChecker");
+            aiState = GameObject.Find("BelugaAxis").GetComponent<AIStateController>();
         }
 
         // off 한 후의 힘 초기화

@@ -17,6 +17,8 @@ public class Ball : MonoBehaviour
     GameObject player = null;               // 플레이어
     GameObject veluga = null;               // 벨루가
 
+    [SerializeField] AIStateController aiState = null;         // aistatecontroller
+
     IEnumerator ballCorutine;
 
     Vector3 BallVelo;                       // 방향
@@ -31,6 +33,7 @@ public class Ball : MonoBehaviour
             tf = GameObject.Find("LookChecker");
             player = GameObject.Find("Camera Container");
             veluga = GameObject.Find("BelugaAxis");
+            aiState = GameObject.Find("BelugaAxis").GetComponent<AIStateController>();
         }
 
         // off 한 후의 힘 초기화

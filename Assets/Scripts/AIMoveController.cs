@@ -83,7 +83,7 @@ public class AIMoveController : AI
 	// 자유 이동 상태
 	public void FreeMove()
 	{
-		veluga_Ani.SetInteger("State", 1);
+		veluga_Ani.SetInteger("MoveState", 1);
 
 		transform.Translate(Vector3.forward * Time.deltaTime * moSpeed);                               // 정면 * 거리 * 일정시간 나눠주기
 
@@ -93,7 +93,7 @@ public class AIMoveController : AI
 	// 대기상태
 	public void Wating()
 	{
-		veluga_Ani.SetInteger("State", 0);
+		veluga_Ani.SetInteger("MoveState", 0);
 
 		//지속 실행 방지... 인데 이게 효율적인지는 의문
 		if (transform.position != transform.position)

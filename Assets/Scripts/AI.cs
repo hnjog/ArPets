@@ -19,7 +19,7 @@ public class AI : MonoBehaviour
     static public int fail = 0;                         //  실패 횟수 (먹이, 실패횟수)
 
     // 여러 가지 상태들(기본 상태가 아닐 경우엔 관련 표정 텍스쳐도 이쪽에서 관리해야 할듯) - AIStateController 에서 주로 사용
-    protected enum Chara_State
+    public enum Chara_State
     {
         state_Idle = 0,                       // 일반 상태      ( 이동과 대기를 하며 움직인다)
         state_Happy = 1,                      // 기쁨 상태      ( 행복도 상승시마다 실행되며 그 경우 관련 애니메이션을 재생하는 용도)
@@ -46,7 +46,7 @@ public class AI : MonoBehaviour
         move = 1,                       // 이동 상태  (2초마다 25%으로의 확률로 정지 상태가 됨)
     }
 
-	protected static Chara_State veluga_State = Chara_State.state_Idle;
+	public static Chara_State veluga_State = Chara_State.state_Idle;
 	protected static Chara_Emotion veluga_Emotion = Chara_Emotion.emotion_Idle;
 	protected static Chara_Move veluga_MoveState = Chara_Move.idle;
 }
