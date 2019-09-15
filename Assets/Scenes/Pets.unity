@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 506482021}
   - component: {fileID: 506482020}
   m_Layer: 5
-  m_Name: Ball
+  m_Name: Cancel
   m_TagString: UIMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -207,7 +207,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 401335abf15396d4eafed996365bd048, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -312,7 +312,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 213512b5da75b8d4ea8a3cbb4062545e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -403,7 +403,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.418e-42, y: 0, z: -7.466076e-33, w: -1.7351018e+21}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -719,6 +719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e13fe39fb1b19da45ab34e081d219a4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 1853509265}
   idle_Menu: {fileID: 1830049741}
   play_Menu: {fileID: 716171955}
   aiState: {fileID: 3744146284150254070}
@@ -957,7 +958,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336090819}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bd0c825d79484447ad504840b184d28, type: 3}
   m_Name: 
@@ -972,12 +973,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336090819}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a1abbbd732939d145a7aff9f287a361d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   veluga_Ani: {fileID: 0}
+  happiness: 50
+  foodPoint: 50
 --- !u!1 &1360806005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1035,7 +1038,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 6e1f71055556f2a42aa54e0e2e5ce56a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1110,7 +1113,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 03d9f35e08b8d1f4fb3c90572bed62f9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1128,6 +1131,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1601277413}
   m_CullTransparentMesh: 0
+--- !u!137 &1705224626 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -5974428576610611277, guid: bb06896244c8d7f4fbadaffb95556401,
+    type: 3}
+  m_PrefabInstance: {fileID: 722869008}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1830049741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1203,7 +1212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1853509264
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1218,11 +1227,11 @@ RectTransform:
   m_Father: {fileID: 1219288786}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 167}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &1853509265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1245,7 +1254,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -1388,7 +1397,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 6e1f71055556f2a42aa54e0e2e5ce56a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1627,11 +1636,51 @@ PrefabInstance:
       propertyPath: veluga_Ani
       value: 
       objectReference: {fileID: 722869009}
+    - target: {fileID: 3744146284814646807, guid: e712339936603c74cad8534de2edf815,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744146284814646807, guid: e712339936603c74cad8534de2edf815,
+        type: 3}
+      propertyPath: cameraPos
+      value: 
+      objectReference: {fileID: 963194228}
     - target: {fileID: 3744146284814646805, guid: e712339936603c74cad8534de2edf815,
         type: 3}
       propertyPath: veluga_Ani
       value: 
       objectReference: {fileID: 722869009}
+    - target: {fileID: 3744146284814646805, guid: e712339936603c74cad8534de2edf815,
+        type: 3}
+      propertyPath: veluga_Face.Array.data[0]
+      value: 
+      objectReference: {fileID: 2800000, guid: b417fca893828a54c8bbaca36cd0ad25, type: 3}
+    - target: {fileID: 3744146284814646805, guid: e712339936603c74cad8534de2edf815,
+        type: 3}
+      propertyPath: veluga_Face.Array.data[1]
+      value: 
+      objectReference: {fileID: 2800000, guid: 105b93821bebefa49bbff98c44624f6f, type: 3}
+    - target: {fileID: 3744146284814646805, guid: e712339936603c74cad8534de2edf815,
+        type: 3}
+      propertyPath: veluga_Face.Array.data[2]
+      value: 
+      objectReference: {fileID: 2800000, guid: f95915808243f38439d7d7ff29d1e0af, type: 3}
+    - target: {fileID: 3744146284814646805, guid: e712339936603c74cad8534de2edf815,
+        type: 3}
+      propertyPath: veluga_Face.Array.data[3]
+      value: 
+      objectReference: {fileID: 2800000, guid: ab238e0fc793148439fcb054e8d395ae, type: 3}
+    - target: {fileID: 3744146284814646805, guid: e712339936603c74cad8534de2edf815,
+        type: 3}
+      propertyPath: veluga_Renderer
+      value: 
+      objectReference: {fileID: 1705224626}
+    - target: {fileID: 3744146284814646805, guid: e712339936603c74cad8534de2edf815,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3744146283959427341, guid: e712339936603c74cad8534de2edf815,
         type: 3}
       propertyPath: m_LocalRotation.z
@@ -1698,18 +1747,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3744146284150254068}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3593cb97ccfc56d48a0ae53ebbefbbaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   veluga_Ani: {fileID: 722869009}
+  happiness: 50
+  foodPoint: 50
   veluga_SFace:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  veluga_SRenderer: {fileID: 0}
+  - {fileID: 2800000, guid: b8d36ef162d37fb4eb7f3259fbf488e5, type: 3}
+  - {fileID: 2800000, guid: 6d554883e3f273a409c97b415467b0a2, type: 3}
+  - {fileID: 2800000, guid: d021c716407eca84c942dcaabde1c606, type: 3}
+  - {fileID: 2800000, guid: b417fca893828a54c8bbaca36cd0ad25, type: 3}
+  - {fileID: 2800000, guid: c408c3ad57e0c4d47a5c267979825e2f, type: 3}
+  - {fileID: 2800000, guid: 4c7a044f4b56abc40a38a957ea80a5dd, type: 3}
+  - {fileID: 2800000, guid: c0bfc58433e0f744790f0f3872a59f76, type: 3}
+  - {fileID: 2800000, guid: cbe0c6a7d2478664ba9f2020b338a8f1, type: 3}
+  - {fileID: 2800000, guid: 57ee94dba65c5144f85220c732717e4b, type: 3}
+  veluga_Renderer: {fileID: 1705224626}
 --- !u!1001 &3985902048213583543
 PrefabInstance:
   m_ObjectHideFlags: 0

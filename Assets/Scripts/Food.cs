@@ -41,6 +41,7 @@ public class Food : MonoBehaviour
         {
             ObjectManager.instance.F_Recovery(gameObject);
             AI.success += 1;
+            aiState.StartCoroutine(aiState.FeedFeed());
         }
     }
 

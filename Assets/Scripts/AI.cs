@@ -11,9 +11,9 @@ public class AI : MonoBehaviour
 
     [Header("행복도와 만복도")]
     [Range(0,100)]
-    protected int happiness = 50;                       // 행복도 (기본수치 50, 최소 0, 최대 100)
+    public int happiness = 50;                       // 행복도 (기본수치 50, 최소 0, 최대 100)
     [Range(0, 100)]
-    protected int foodPoint = 50;                       // 만복도 (기본수치 50, 최소 0, 최대 100)
+    public int foodPoint = 50;                       // 만복도 (기본수치 50, 최소 0, 최대 100)
 
     static public int success = 0;                      //  성공 횟수 (먹이, 공놀이 성공 횟수)
     static public int fail = 0;                         //  실패 횟수 (먹이, 실패횟수)
@@ -46,7 +46,11 @@ public class AI : MonoBehaviour
         move = 1,                       // 이동 상태  (2초마다 25%으로의 확률로 정지 상태가 됨)
     }
 
-	public static Chara_State veluga_State = Chara_State.state_Idle;
+	public static Chara_State veluga_State = Chara_State.state_Hi;
 	protected static Chara_Emotion veluga_Emotion = Chara_Emotion.emotion_Idle;
 	protected static Chara_Move veluga_MoveState = Chara_Move.idle;
+
+
+    // 벨루가의 움직임이 완전히 멈춘후에 모드가 실행이 되도록 해야 함
+    protected static bool isStillMove = false;
 }

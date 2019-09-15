@@ -3,16 +3,21 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - AIEmotionController
     - AIMoveController
+    - AIStateController
+    - Ball
     - BasicAI
     - CameraScript
     - Food
     - ObjectManager
+    - StatusCal
     - UInput
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -21,7 +26,6 @@ ScriptsOnlyBuild:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.CanvasScaler
-    - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
     - UnityEngine.UI.Text
   sceneClasses:
@@ -75,15 +79,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10394}
     - Class: 114
-      Script: {instanceID: 10750}
+      Script: {instanceID: 10478}
     - Class: 114
-      Script: {instanceID: 10752}
+      Script: {instanceID: 10500}
     - Class: 114
-      Script: {instanceID: 11032}
+      Script: {instanceID: 10740}
     - Class: 114
-      Script: {instanceID: 11066}
+      Script: {instanceID: 10754}
     - Class: 114
-      Script: {instanceID: 11314}
+      Script: {instanceID: 10756}
+    - Class: 114
+      Script: {instanceID: 11068}
+    - Class: 114
+      Script: {instanceID: 11316}
     - Class: 114
       Script: {instanceID: 11380}
     - Class: 114
@@ -92,9 +100,15 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 128
       Script: {instanceID: 0}
+    - Class: 135
+      Script: {instanceID: 0}
+    - Class: 136
+      Script: {instanceID: 0}
     - Class: 137
       Script: {instanceID: 0}
     - Class: 157
+      Script: {instanceID: 0}
+    - Class: 213
       Script: {instanceID: 0}
     - Class: 222
       Script: {instanceID: 0}
@@ -197,7 +211,7 @@ ScriptsOnlyBuild:
     className: GridLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 2e8fea6914af135396cd8855b64ca22e
+      Hash: f8ccfbd428e279d0e2392900ffc697e8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AI
@@ -281,7 +295,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 5f61f827e6a4cb57da30fd7dc3584890
+      Hash: 7a419ba8d670cfae6e99e4681c5bc811
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ObjectManager
@@ -329,7 +343,7 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
-      Hash: d6a6ba32a82bac2957bf2250dc54a7cf
+      Hash: 95b64d6a097a25a4356ac7f362dfb915
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AIStateController
@@ -339,6 +353,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SpriteAnimator
+  - hash:
+      serializedVersion: 2
+      Hash: f8ccfbd428e279d0e2392900ffc697e8
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: StatusCal
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -371,13 +391,19 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 18c954ac5f537959cb72e67913c284aa
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Ball
+  - hash:
+      serializedVersion: 2
+      Hash: 18c954ac5f537959cb72e67913c284aa
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Food
   - hash:
       serializedVersion: 2
-      Hash: d92e1cfeb9b1dc1dafeac0aaffd4abeb
+      Hash: ed93d9aa89260919fa46478f5da7064f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AIEmotionController
@@ -437,12 +463,6 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: InputCheck
-  - hash:
-      serializedVersion: 2
       Hash: f336e086360abe49a3323e5f1583c35a
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -461,7 +481,7 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: 50cbef59e91349bc9fcdff8a7b651a69
+      Hash: b030f5e0d9c655b775416610638d8a04
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AIMoveController
@@ -563,7 +583,7 @@ ScriptsOnlyBuild:
     className: Slider
   - hash:
       serializedVersion: 2
-      Hash: 4ce15e99c635d2567873d27549d1f16f
+      Hash: 08bf29750d92a7dee4a4c1533024a019
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UInput
@@ -582,4 +602,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/Pets.unity
-  playerPath: D:/OWYO/testPet.apk
+  playerPath: D:/OWYO/PETS.apk

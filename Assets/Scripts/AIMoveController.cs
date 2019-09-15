@@ -22,7 +22,9 @@ public class AIMoveController : AI
 
     [Header("위치 조정용")]
     [SerializeField]
-    Transform lookChecker = null;                    // 카메라와 일정거리 이상 떨어져 있는가
+    Transform lookChecker = null;             // 카메라와 일정거리 이상 떨어져 있는가
+    [SerializeField]
+    Transform cameraPos = null;
     float distance;                           // 거리
 
     [Header("쿼터니언 값 조정")]
@@ -50,6 +52,31 @@ public class AIMoveController : AI
 			else
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, qy, 0), 0.01f);
 		}
+        // 다른 상태가 되었을 때, 카메라의 안에 들어오게 하고, 카메라를 바라보게 한다.
+        else
+        {
+            if (isStillMove)
+            {
+                // 일단 일정 거리안에 들어오게
+                if (Vector3.Distance(transform.position, lookChecker.position) > 0.2f)
+                {
+                    Quaternion qc = Quaternion.LookRotation(lookChecker.position - transform.position);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, qc, roSpeed);
+                    transform.Translate(Vector3.forward * Time.deltaTime * moSpeed);
+                }
+                else
+                {
+                    Quaternion qd = Quaternion.LookRotation(cameraPos.position - transform.position);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, qd, 0.1f);
+                    // 카메라를 바라보게 되면
+                    if(transform.rotation == qd)
+                    {
+                        isStillMove = false;
+                    }
+                }
+            }
+
+        }
 	}
 
 	// 테스트용 AI

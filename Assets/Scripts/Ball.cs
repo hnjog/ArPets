@@ -53,8 +53,9 @@ public class Ball : MonoBehaviour
         Throw(BallVelo);
         AI.success += 1;
 
+        aiState.StartCoroutine(aiState.BallBall());
         // 코루틴 초기화
-        
+
         StartCoroutine(ballCorutine);
     }
 
@@ -67,6 +68,7 @@ public class Ball : MonoBehaviour
             BallVelo = Throwing(veluga.transform.position, player.transform.position, degree);                 // 벨루가가 플레이어에게 볼을 던짐
             Throw(BallVelo);
             StopCoroutine(ballCorutine);
+            aiState.StartCoroutine(aiState.BallBall());
         }
     }
 

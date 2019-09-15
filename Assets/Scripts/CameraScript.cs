@@ -81,7 +81,7 @@ public class CameraScript : MonoBehaviour
     private GameObject cameraContainer;
     private Quaternion rot;
 
-    private void Start()
+    private void Awake()
     {
         cameraContainer = new GameObject("Camera Container");
         cameraContainer.transform.position = transform.position;

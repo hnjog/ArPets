@@ -12,11 +12,14 @@ using UnityEngine;
 public class AIStateController : AI
 {
     [SerializeField]
-    // 0 : 먹이주기, 공놀이 상태일 경우 기본 상태로? , 1 : 기쁨 , 2 : 슬픔 , 3 : 놀람 , 4 : 인사 
-    Texture[] veluga_SFace = new Texture[4];               // 각 애니메이션 재생 시 사용할 텍스쳐들
+    // 0 : 놀람 1 : 인사 2 : 배고픔 3: 기쁨 
+    // 4 : 슬픔 5 : 먹이 대기 6 : 먹이 먹었을 때
+    // 7 : 공놀이 대기 8 : 공 받았을 때
+    Texture[] veluga_SFace = new Texture[9];               // 각 애니메이션 재생 시 사용할 텍스쳐들
 
+    // 벨루가 표정 렌더러
     [SerializeField]
-    Renderer veluga_SRenderer;                             // 벨루가 표정 렌더러
+    Renderer veluga_Renderer = null;                             // 벨루가 표정 렌더러
 
     [Header("공놀이, 먹이주기관련 변수")]
     bool isDoingBall = false;                              // 공놀이 중
@@ -32,6 +35,7 @@ public class AIStateController : AI
     {
         //깜짝 놀람 애니메이션 & 인사 하는 것
         checkHappy = happiness;
+        StartCoroutine(StartEmotion());
         StartCoroutine(StateChange());
         StartCoroutine(HappyChecker());
     }
@@ -39,6 +43,11 @@ public class AIStateController : AI
     // 공놀이 선택
     public void UIBall()
     {
+        // 움직이는 중일 시 대기하라
+        if (isStillMove)
+        {
+            StartCoroutine(Wait());
+        }
         veluga_State = Chara_State.state_Ball;
         UInput.uIState = UInput.UIState.Ball;
     }
@@ -46,6 +55,11 @@ public class AIStateController : AI
     // 먹이주기, UI 에서 사용될 예정
     public void UIFeed()
     {
+        // 움직이는 중일 시 대기하라
+        if (isStillMove)
+        {
+            StartCoroutine(Wait());
+        }
         veluga_State = Chara_State.state_Eat;
         UInput.uIState = UInput.UIState.Feed;
     }
@@ -68,19 +82,14 @@ public class AIStateController : AI
     {
         while(true)
         {
-            // 공놀이나, 먹이주기 상태가 아닐때!
-            if (!isDoingBall || !isDoingFeed)
+            // 움직이는 중일 시 대기하라
+            if(isStillMove)
             {
-                // 공놀이
-                //if (veluga_State == Chara_State.state_Ball)
-                //{
-                //    StartCoroutine(State_Ball());
-                //}
-                //// 먹이주기
-                //else if (veluga_State == Chara_State.state_Eat)
-                //{
-                //    StartCoroutine(State_Feed());
-                //}
+                StartCoroutine(Wait());
+            }
+            // 공놀이나, 먹이주기 상태, 이동 중이 아닐때!
+            if (!isDoingBall || !isDoingFeed || !isStillMove)
+            {
                 // 행복도 상승
                 if (isHappy)
                 {
@@ -98,37 +107,53 @@ public class AIStateController : AI
                 }
 
             }
+            else if(isDoingBall && !isStillMove)
+            {
+                // 공놀이 대기 상태 및 표정
+                StartCoroutine(State_Ball());
+            }
+            else if(isDoingFeed && !isStillMove)
+            {
+                // 먹이 대기 상태 및 표정
+                StartCoroutine(State_Feed());
+            }
+
             yield return null;
         }
     }
 
-    
+    IEnumerator StartEmotion()
+    {
+        veluga_Renderer.material.mainTexture = veluga_SFace[0];
+        yield return new WaitForSeconds(3f);
+        veluga_Renderer.material.mainTexture = veluga_SFace[1];
+        yield return new WaitForSeconds(3f);
+        veluga_State = Chara_State.state_Idle;
+
+    }
+
+
     IEnumerator State_Ball()
     {
-        // 관련 애니메이션
+        veluga_Renderer.material.mainTexture = veluga_SFace[7];
+        veluga_Ani.SetInteger("BallState", 1);
         yield return new WaitForSeconds(3f);
         //veluga_State = Chara_State.state_Idle;
     }
 
     IEnumerator State_Feed()
     {
-        // 관련 애니메이션
+        veluga_Renderer.material.mainTexture = veluga_SFace[5];
+        veluga_Ani.SetInteger("FeedState", 1);
         yield return new WaitForSeconds(3f);
         //veluga_State = Chara_State.state_Idle;
-    }
-
-    // 배고픔 상태 일시 사용될 코루틴
-    IEnumerator State_Hungry()
-    {
-        // 관련 애니메이션
-        yield return new WaitForSeconds(3f);
-        veluga_State = Chara_State.state_Idle;
     }
 
     // 기쁨 상태 일시 사용될 코루틴
     IEnumerator State_Happy()
     {
-        // 관련 애니메이션
+        veluga_Renderer.material.mainTexture = veluga_SFace[3];
+        veluga_Ani.SetTrigger("Happy");
         yield return new WaitForSeconds(3f);
         veluga_State = Chara_State.state_Idle;
         isHappy = false;
@@ -137,7 +162,8 @@ public class AIStateController : AI
     // 슬픔 상태 일시 사용될 코루틴
     IEnumerator State_Sad()
     {
-        // 관련 애니메이션
+        veluga_Renderer.material.mainTexture = veluga_SFace[4];
+        veluga_Ani.SetTrigger("Sad");
         yield return new WaitForSeconds(3f);
         veluga_State = Chara_State.state_Idle;
         isSad = false;
@@ -162,19 +188,47 @@ public class AIStateController : AI
         }
     }
 
-    // 배고픔 애니메이션 관련
+    // 배고픔 상태일시 사용할 것
     IEnumerator State_Hunger()
     {
         // 30% 확률
         if (Random.value <= 0.3)
         {
-            //배고픔 애니메이션 실행
-            yield return new WaitForSecondsRealtime(3f);
+            veluga_Renderer.material.mainTexture = veluga_SFace[2];
+            veluga_Ani.SetTrigger("Hungry");
+            yield return new WaitForSeconds(3f);
+            veluga_State = Chara_State.state_Idle;
         }
         // 다시 실행할 때 갑자기 꺼지는 일이 없도록
         else
             yield return null;
     }
 
-    
+    // isStillMove 가 true일 때 false 일 때까지 기다리게 하는 코루틴
+    IEnumerator Wait()
+    {
+        yield return new WaitUntil(() => !isStillMove);
+    }
+
+    // 먹이 먹을 때 순간의 애니메이션 및 표정
+    public IEnumerator FeedFeed()
+    {
+        veluga_Renderer.material.mainTexture = veluga_SFace[6];
+        veluga_Ani.SetInteger("FeedState", 2);
+        yield return new WaitForSeconds(3f);
+        veluga_Renderer.material.mainTexture = veluga_SFace[5];
+        veluga_Ani.SetInteger("FeedState", 1);
+    }
+
+
+    // 공을 받는 순간의 애니메이션 및 표정 이후 애니메이션 재생 후 대기 상태로
+    public IEnumerator BallBall()
+    {
+        veluga_Renderer.material.mainTexture = veluga_SFace[8];
+        veluga_Ani.SetInteger("BallState", 2);
+        yield return new WaitForSeconds(3f);
+        veluga_Renderer.material.mainTexture = veluga_SFace[7];
+        veluga_Ani.SetInteger("BallState", 1);
+    }
+
 }

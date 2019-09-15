@@ -6,11 +6,11 @@ using UnityEngine.UI;
 // UI 기능 및 vuzix input 확인
 // 먹이 주기 상태일 경우, 메뉴에 먹이는 없게 해야 함.
 // 타이밍을 맞게 치는 경우의 수정이 필요함.
-
+// 메뉴 열릴 시 타임 스케일 조정
 
 public class UInput : MonoBehaviour
 {
-    //public Text text;
+    public Text text;
 
     [Header("메뉴")]
     [SerializeField] GameObject idle_Menu = null;              // 기본 메뉴
@@ -25,6 +25,11 @@ public class UInput : MonoBehaviour
     byte[] menu = new byte[3] { 0, 1, 2 };
     byte menu_State = 1;
     byte pmenu_State = 1;
+
+    //[Header("시간 조절용")]
+    //float lt;
+    //float dt;
+    //float aniTime;
 
     public static bool isPlayBall = false;     // 공놀이 중인가
 
@@ -53,6 +58,7 @@ public class UInput : MonoBehaviour
     private void Update()
     {
         VInput.Update(Time.unscaledDeltaTime);
+        text.text = "happy : " + aiState.happiness + " foodPo : " + aiState.foodPoint;
     }
 
     // 메뉴 바꿔주는 함수
@@ -63,6 +69,7 @@ public class UInput : MonoBehaviour
             if(idle_Menu.activeSelf == false)
             {
                 idle_Menu.SetActive(true);
+                play_Menu.SetActive(false);
             }
         }
         else if(uIState == UIState.play_m)
@@ -70,6 +77,7 @@ public class UInput : MonoBehaviour
             if(play_Menu.activeSelf == false)
             {
                 play_Menu.SetActive(true);
+                idle_Menu.SetActive(false);
             }
         }
     }
@@ -233,4 +241,8 @@ public class UInput : MonoBehaviour
         }
     }
 
+    IEnumerator UIWait()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+    }
 }
