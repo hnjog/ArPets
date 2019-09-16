@@ -7,6 +7,9 @@ using UnityEngine;
 // 해당 조건이 끝나면 다시 기본 상태로 한 번 돌아옴.
 // UI 특정 메뉴 선택 시 먹이주기, 공놀이 작동
 // 만복도, 행복도 관련 작업 중
+// 감정표현 오브젝트는 애니메이션이 있는가?(그렇다면 작동이 되는 시점에서 OnEnable을 사용하던가, 애니메이션 재생 후 다시 꺼지게 해야 함)
+// 감정표현 오브젝트는 각기의 위치가 다른가?( 생성될 때 벨루가의 위치 기준으로 바꿔주어야 함)
+// 이쪽에서 감정표현 오브젝트를 관리하기 더 용이해 보였음.
 
 
 public class AIStateController : AI
@@ -31,8 +34,23 @@ public class AIStateController : AI
     bool isHappy = false;                                  // 행복함 (기존의 행복도 보다 변화한 행복도가 높음)
     bool isSad = false;                                    // 안 행복함(기존의 행복도 보다 변화한 행복도가 낮음)
 
+    [Header("감정표현용 리스트")]
+    // 0 : 화남 1: 크게 놀람 2 : 호기심
+    // 3 : 행복 4: 인사 5: 배고픔 6 : 슬픔 7: 놀람
+    public List<GameObject> l_Emotion = new List<GameObject>();  // 감정표현 프리팹 리스트(게임 오브젝트 등록용)
+    List<GameObject> e_List = new List<GameObject>();            // 감정표현 오브젝트 풀링 리스트(오브젝트 관리용)
+
     private void Start()
     {
+        // 감정표현 생성 후, 리스트 등록
+        for (int l = 0; l < 8; l++)
+        {
+            GameObject e_object = Instantiate(l_Emotion[l], Vector3.zero, Quaternion.identity);
+            e_List.Add(e_object);
+            e_object.transform.SetParent(transform);
+            e_object.SetActive(false);
+        }
+
         //깜짝 놀람 애니메이션 & 인사 하는 것
         checkHappy = happiness;
         StartCoroutine(StartEmotion());

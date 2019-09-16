@@ -15,8 +15,10 @@ public class AIEmotionController : AI
     [SerializeField]
     Renderer veluga_Renderer = null;                             // 벨루가 표정 렌더러
 
+   
     private void Start()
     {
+        
         StartCoroutine(EChange());
         StartCoroutine(FChange());
     }

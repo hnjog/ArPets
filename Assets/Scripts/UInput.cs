@@ -21,15 +21,12 @@ public class UInput : MonoBehaviour
     Animator mAni;                      // 메뉴 애니메이터
     Animator pmAni;                     // 플레이 중 애니메이터
 
+    
+
     [Header(" 메뉴 상태")]
     byte[] menu = new byte[3] { 0, 1, 2 };
     byte menu_State = 1;
     byte pmenu_State = 1;
-
-    //[Header("시간 조절용")]
-    //float lt;
-    //float dt;
-    //float aniTime;
 
     public static bool isPlayBall = false;     // 공놀이 중인가
 
@@ -59,6 +56,15 @@ public class UInput : MonoBehaviour
     {
         VInput.Update(Time.unscaledDeltaTime);
         text.text = "happy : " + aiState.happiness + " foodPo : " + aiState.foodPoint;
+
+        //if(Input.GetMouseButton(0))
+        //{
+        //    uIState = UIState.menu;
+        //    Time.timeScale = 0;
+        //
+        //    mAni.SetTrigger("yu");                          // 메뉴 등장
+        //    mAni.SetInteger("Index", 1);                        // 초기 값
+        //}
     }
 
     // 메뉴 바꿔주는 함수

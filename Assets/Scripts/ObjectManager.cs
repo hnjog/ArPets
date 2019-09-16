@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // 먹이와 공의 오브젝트 풀
-// 
 
 public class ObjectManager : MonoBehaviour
 {
@@ -17,8 +16,8 @@ public class ObjectManager : MonoBehaviour
     [SerializeField]
     GameObject ob_Ball = null;                      // 공 프리팹
 
-    public Queue<GameObject> q_Food = new Queue<GameObject>();   //먹이용 큐
-    public Queue<GameObject> q_Ball = new Queue<GameObject>();   //공 큐
+    public Queue<GameObject> q_Food = new Queue<GameObject>();   // 먹이용 큐
+    public Queue<GameObject> q_Ball = new Queue<GameObject>();   // 공 큐
 
     private void Start()
     {
@@ -34,6 +33,7 @@ public class ObjectManager : MonoBehaviour
             f_object.SetActive(false);
         }
 
+        
         // 공 생성 1회
         GameObject b_object = Instantiate(ob_Ball, Vector3.zero, Quaternion.identity);
         q_Ball.Enqueue(b_object);

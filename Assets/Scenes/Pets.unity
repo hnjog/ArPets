@@ -471,7 +471,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: e96bdb73e56442d448eadd82d1ccafa1, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -1188,7 +1188,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 81a8d531f43d60a4895467122c86c94f, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -1766,6 +1766,16 @@ MonoBehaviour:
   - {fileID: 2800000, guid: cbe0c6a7d2478664ba9f2020b338a8f1, type: 3}
   - {fileID: 2800000, guid: 57ee94dba65c5144f85220c732717e4b, type: 3}
   veluga_Renderer: {fileID: 1705224626}
+  l_Emotion:
+  - {fileID: 5570674767804517200, guid: 709900940cd6f374ea32fe71fca794ec, type: 3}
+  - {fileID: 6770818915775518426, guid: 4892dc0ee2ca5ea4bbb0f569e195c1d6, type: 3}
+  - {fileID: 624024685800540168, guid: 4a64c366f84c5604689651f01cac4c85, type: 3}
+  - {fileID: 8737250541717646457, guid: c0c2504abca973c4aaf7b8a646676cf0, type: 3}
+  - {fileID: 5788096114216585460, guid: 5f5d13eeaf7645a4ab68741cdeaa2a83, type: 3}
+  - {fileID: 3656755129096527765, guid: 735bc5fd850f553458bbb6d64eefdbd3, type: 3}
+  - {fileID: 3119570978889349714, guid: e10483f891655da459ed53a8e0f95660, type: 3}
+  - {fileID: 2106581081613196649, guid: c6e9cbd5fcf5d834abef3a7290a1d666, type: 3}
+  e_List: []
 --- !u!1001 &3985902048213583543
 PrefabInstance:
   m_ObjectHideFlags: 0
