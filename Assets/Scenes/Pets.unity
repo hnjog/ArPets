@@ -1143,7 +1143,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.4785522e-38, y: 6.93358e-39, z: 3.67342e-40, w: 2.5162926e-38}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2432,11 +2432,11 @@ MonoBehaviour:
   - {fileID: 963194232}
   - {fileID: 1598728792}
   sound_Beluga:
-  - {fileID: 8300000, guid: 995722639dfdb6149b7277ee01387d25, type: 3}
-  - {fileID: 8300000, guid: c6a5358cbca319440aa0d7e9d8601d52, type: 3}
-  - {fileID: 8300000, guid: a80b8c883fda9d9428e02233c4774170, type: 3}
+  - {fileID: 8300000, guid: 04a7e143c7f4f2a40aa0b037651a05c0, type: 3}
+  - {fileID: 8300000, guid: 149fd99cc50d0df4c8d28414213eafe2, type: 3}
+  - {fileID: 8300000, guid: 04a7e143c7f4f2a40aa0b037651a05c0, type: 3}
   sound_Effect:
-  - {fileID: 8300000, guid: 35871f951dea47b4fa2752236227d23c, type: 3}
+  - {fileID: 8300000, guid: 620f5a722ee20ee4ca1be8e954079778, type: 3}
   - {fileID: 8300000, guid: 74956d6cb3971c346a48a05631bb2ac6, type: 3}
   - {fileID: 8300000, guid: c4e7547bb51f28942b46097186c6ac18, type: 3}
   - {fileID: 8300000, guid: 5ea9b321809ddd843873462c5770dbf0, type: 3}
@@ -2445,7 +2445,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 86ca4580d183d61479b40188c32daefe, type: 3}
   - {fileID: 8300000, guid: 4cc944bfb80c5144ab7cd1f224d1f1fa, type: 3}
   sound_Bgm:
-  - {fileID: 8300000, guid: f5907582f8b080849850fe77c5e1068f, type: 3}
+  - {fileID: 8300000, guid: 22a737797eafa0b4495ed62526d43575, type: 3}
 --- !u!82 &1598728792
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3501,6 +3501,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BelugaAxis
       objectReference: {fileID: 0}
+    - target: {fileID: 3447225948257808218, guid: e712339936603c74cad8534de2edf815,
+        type: 3}
+      propertyPath: Priority
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2027429663100750815, guid: e712339936603c74cad8534de2edf815,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3571,11 +3576,6 @@ PrefabInstance:
       propertyPath: pointer
       value: 
       objectReference: {fileID: 1626538602}
-    - target: {fileID: 3447225948257808218, guid: e712339936603c74cad8534de2edf815,
-        type: 3}
-      propertyPath: Priority
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3447225947877696740, guid: e712339936603c74cad8534de2edf815,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
