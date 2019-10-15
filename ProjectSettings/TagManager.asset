@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pet
   - UIMenu
+  - Timing
   layers:
   - Default
   - TransparentFX
