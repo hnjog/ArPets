@@ -7,6 +7,8 @@ public class LoadSceneM : MonoBehaviour
 {
 	//[SerializeField] Animator owyoLogo = null;
 
+	float timer = 0f;
+
 	AsyncOperation doing;
 
 	private void Start()
@@ -18,16 +20,19 @@ public class LoadSceneM : MonoBehaviour
 	{
 		doing = SceneManager.LoadSceneAsync(1);
 		doing.allowSceneActivation = false;
-		yield return new WaitForSecondsRealtime(1.1f);
+		//yield return new WaitForSecondsRealtime(6f);
 
 		while (!doing.isDone)
 		{
-
-			if (doing.progress >= 0.9f)
+			yield return null;
+			timer += Time.deltaTime;
+			Debug.Log(timer);
+			if (timer >= 3f)
 			{
 				doing.allowSceneActivation = true;
-				yield return null;
+				
 			}
+			
 		}
 	}
 }

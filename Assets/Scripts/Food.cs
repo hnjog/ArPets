@@ -18,7 +18,7 @@ public class Food : MonoBehaviour
 	[SerializeField] Transform veTF = null;
 	GameObject obm = null;
 
-	[SerializeField] GameObject foodParticle = null;
+	[SerializeField] Transform foodParticle = null;
 	
 	// 작동 될 때
 	private void OnEnable()
@@ -32,7 +32,7 @@ public class Food : MonoBehaviour
 			aiState = GameObject.Find("BelugaAxis").GetComponent<AIStateController>();
 			veTF = GameObject.Find("BelugaAxis").GetComponent<Transform>();
 			uu = GameObject.Find("Main Camera").GetComponent<UInput>();
-			foodParticle = GameObject.Find("Eating");
+			foodParticle = GameObject.Find("Particle").transform.Find("Eating");
 		}
 
 		uu.fakeFish.SetActive(false);
@@ -53,8 +53,9 @@ public class Food : MonoBehaviour
 		Debug.Log(other.gameObject.tag);
 		if (other.gameObject.tag == "Pet")
 		{
+			Debug.Log(other.gameObject.name);
 			StopCoroutine("DestroyFood");
-			foodParticle.SetActive(true);
+			foodParticle.gameObject.SetActive(true);
 			SoundManager.s_Instance.Sound_EffectFeed();
 			ObjectManager.instance.F_Recovery(gameObject);
 			AI.success++;

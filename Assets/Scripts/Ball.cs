@@ -26,7 +26,7 @@ public class Ball : MonoBehaviour
 	Transform caTF = null;
 	Transform catchTF = null;
 
-	[SerializeField] GameObject ballHit = null;
+	[SerializeField] Transform ballHit = null;
 
 	// 작동 될 때
 	private void OnEnable()
@@ -43,7 +43,7 @@ public class Ball : MonoBehaviour
 			input = GameObject.Find("Main Camera").GetComponent<UInput>();
 			caTF = GameObject.Find("Main Camera").GetComponent<Transform>();
 			catchTF = GameObject.Find("CatchPoint").GetComponent<Transform>();
-			ballHit = GameObject.Find("Ball");
+			ballHit = GameObject.Find("Particle").transform.Find("Ball");
 		}
 
 		// off 한 후의 힘 초기화  + new Vector3(0,4, veluga.transform.position.z * 2.5f) 
@@ -77,7 +77,7 @@ public class Ball : MonoBehaviour
 		if (other.gameObject.tag == "Pet")
 		{
 			input.TimingOn();
-			ballHit.SetActive(true);
+			ballHit.gameObject.SetActive(true);
 			SoundManager.s_Instance.Sound_EffectBall();
 			b_rigid.velocity = Vector3.zero;
 			BallVelo = Throwing(transform.position, catchTF.position, degree);                 // 벨루가가 플레이어에게 볼을 던짐  + new Vector3(0, 0, veluga.transform.position.z * 2.5f)veluga.

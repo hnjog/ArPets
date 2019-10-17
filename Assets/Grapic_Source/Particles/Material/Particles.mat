@@ -78,6 +78,8 @@ Material:
     - _DstBlend: 0
     - _DstMode: 10
     - _FresnelFadeFactor: 3
+    - _FresnelPow: 5
+    - _FresnelR0: 0.04
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -99,12 +101,14 @@ Material:
     - _UseCutoutTex: 0
     - _UseCutoutThreshold: 0
     - _UseFrameBlending: 0
+    - _UseFresnel: 0
     - _UseFresnelFading: 0
     - _UseLighting: 0
     - _UseNoiseDistortion: 0
     - _UseParticlesAlphaCutout: 0
     - _UseSoft: 0
     - _UseSoftCutout: 0
+    - _UseSoftInverted: 0
     - _UseVertexStreamRandom: 0
     - _ZWrite: 1
     - _ZWriteMode: 0
@@ -113,4 +117,5 @@ Material:
     - _CutoutColor: {r: 1, g: 1, b: 1, a: 1}
     - _DistortionSpeedScale: {r: 5, g: -5, b: 0.1, a: 0.1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TintColor: {r: 8.676471, g: 6.0145717, b: 5.486592, a: 0.1}
+    - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TintColor: {r: 2.1185474, g: 0.6100529, b: 0.29948053, a: 1}

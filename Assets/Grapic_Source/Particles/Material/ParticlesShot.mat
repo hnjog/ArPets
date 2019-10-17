@@ -118,4 +118,4 @@ Material:
     - _DistortionSpeedScale: {r: 5, g: -5, b: 0.1, a: 0.1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TintColor: {r: 3.7315168, g: 0.9215993, b: 0.3344283, a: 0.05}
+    - _TintColor: {r: 0.03604484, g: 0.8490566, b: 0.45497122, a: 0.78431374}
