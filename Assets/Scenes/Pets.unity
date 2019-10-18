@@ -1029,7 +1029,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 41.7, y: -41.5}
+  m_AnchoredPosition: {x: 41.699997, y: -41.5}
   m_SizeDelta: {x: 63.5, y: 63.5}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &667643734
@@ -1328,7 +1328,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 33b680bf83847094ea491d9080fde7ff, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3728,7 +3728,7 @@ PrefabInstance:
     - target: {fileID: 3447225948345522310, guid: e712339936603c74cad8534de2edf815,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3447225946932793255, guid: e712339936603c74cad8534de2edf815,
         type: 3}

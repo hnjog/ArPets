@@ -41,6 +41,7 @@ public class SoundManager : MonoBehaviour
 			yield return new WaitForSeconds(5f);
 			if (AIStateController.veluga_State == AI.Chara_State.state_Idle && Random.value <= 0.5f)
 			{
+	
 				soundSources[3].clip = sound_Bgm[1];
 				soundSources[3].Play();
 			}
@@ -69,6 +70,7 @@ public class SoundManager : MonoBehaviour
 	{
 		soundSources[1].volume = 0.4f;
 		soundSources[1].PlayOneShot(sound_Effect[0]);
+		soundSources[1].volume = 1f;
 	}
 	public void Sound_EffectFeed()
 	{
@@ -103,6 +105,8 @@ public class SoundManager : MonoBehaviour
 	}
 	public void Sound_EffectHungry()
 	{
+		soundSources[1].volume = 0.3f;
 		soundSources[1].PlayOneShot(sound_Effect[7]);
+		soundSources[1].volume = 1f;
 	}
 }
