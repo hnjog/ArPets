@@ -15,6 +15,8 @@ public class UInput : MonoBehaviour
 	[Header("메뉴")]
 	[SerializeField] GameObject idle_Menu = null;              // 기본 메뉴
 	[SerializeField] GameObject play_Menu = null;              // 게임 중 메뉴
+	[SerializeField] GameObject credit = null;                 // 제작자 크레딧
+	[SerializeField] Animator credit_Ani = null;			   // 크레딧 애니메이터(코루틴을 통해 끝나는지 확인)
 
 
 	[SerializeField] AIStateController aiState = null;         // aistatecontroller
@@ -55,7 +57,8 @@ public class UInput : MonoBehaviour
 		Feed,                                                  // 먹이 상태
 		Ball,                                                  // 공놀이 상태
 		menu,                                                  // 메뉴 상태     (기본 메뉴 -> 먹이, 공놀이)
-		play_m                                                 // 플레이 중 메뉴(돌아가기, 기본 상태로)
+		play_m,                                                // 플레이 중 메뉴(돌아가기, 기본 상태로)
+		credit_m											   // 메뉴 상태에서 아래로 슬라이드 할 경우 나오는 상태, 밑으로 내려가는 애니메이션을 재생,
 	}
 
 	public static UIState uIState = UIState.Idle;
@@ -83,6 +86,27 @@ public class UInput : MonoBehaviour
 			VInput.Update(Time.unscaledDeltaTime);
 			StateAndUI();
 		}
+
+		//if(Input.GetMouseButtonDown(0))
+		//{
+		//	Debug.Log("a1");
+		//	if (uIState != UIState.credit_m)
+		//	{
+		//		Debug.Log("a2");
+		//		Debug.Log(credit.name);
+		//		CreditOn();
+		//		uIState = UIState.credit_m;
+		//		StartCoroutine("CreditChecker");
+		//	}
+		//	else{
+		//		StopCoroutine("CreditChecker");
+		//		CreditOff();
+		//		credit_Ani.Rebind();                            // 애니메이터 초기화
+		//		uIState = UIState.menu;
+		//	}
+		//}
+
+
 	}
 
 	// 메뉴 바꿔주는 함수
@@ -153,6 +177,16 @@ public class UInput : MonoBehaviour
 			filters[3].SetActive(false);
 			filters[4].SetActive(true);
 		}
+	}
+
+	void CreditOn()
+	{
+		credit.SetActive(true);
+	}
+
+	void CreditOff()
+	{
+		credit.SetActive(false);
 	}
 
 	public void TimingOn()
@@ -244,6 +278,13 @@ public class UInput : MonoBehaviour
 				{
 					rhythm.CheckRhythm();                             // 리듬 체크
 				}
+				else if(uIState == UIState.credit_m)					  // 인트로 상태일 경우 터치시 꺼준다.
+				{
+					StopCoroutine("CreditChecker");
+					CreditOff();
+					credit_Ani.Rebind();						    // 애니메이터 초기화
+					uIState = UIState.menu;
+				}
 				break;
 			case VINPUT_EVENT.TAP_2FINGER:                          // 손가락 두 개 탭
 				break;
@@ -323,7 +364,12 @@ public class UInput : MonoBehaviour
 
 				break;
 			case VINPUT_EVENT.SWIPE_DOWN_1FINGER:                  // 손가락 하나로 밑으로 스와이프
-
+				if(uIState == UIState.menu)
+				{
+					CreditOn();
+					uIState = UIState.credit_m;
+					StartCoroutine("CreditChecker");
+				}
 				break;
 			case VINPUT_EVENT.SWIPE_FORWARD_2FINGER:               // 손가락 두 개로 앞으로 스와이프
 
@@ -335,6 +381,20 @@ public class UInput : MonoBehaviour
 				if (uIState == UIState.Idle) Application.Quit();                                // 기본 메뉴일 시 앱 종료
 				break;
 		}
+	}
+
+	//크레딧 재생확인 코루틴
+	IEnumerator CreditChecker()
+	{
+		Debug.Log("a3");
+		while(credit_Ani.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1f)
+		{
+			yield return null;
+		}
+		CreditOff();
+		uIState = UIState.menu;
+		Debug.Log("a4");
+		yield return null;
 	}
 
 	// 공놀이 시작 메서드
