@@ -26,6 +26,10 @@ public class StatusCal : AI
 	[Header("타이밍 메뉴")]
 	[SerializeField] GameObject timing_menu = null;
 
+	[Header("왕관")]
+	[SerializeField] GameObject crown = null;				// 5회 이상 10회 미만
+	[SerializeField] GameObject shine_Crown = null;			// 10회 이상일 시 
+
 	private void Awake()
 	{
 		Load();
@@ -126,6 +130,13 @@ public class StatusCal : AI
 			foodPoint -= (success + fail);
 			ballSuccess.SetActive(true);
 			SoundManager.s_Instance.Sound_EffectBallSuccess();
+			if(success >= 10)
+			{
+				ShineCrown();
+			}
+			else{
+				CrownOn();
+			}
 		}
 		else
 		{
@@ -133,6 +144,7 @@ public class StatusCal : AI
 			foodPoint -= (success + fail);
 			ballFail.SetActive(true);
 			SoundManager.s_Instance.Sound_EffectBallFail();
+			CrownOff();
 		}
 
 		Save();
@@ -152,6 +164,27 @@ public class StatusCal : AI
 
 		StartCoroutine(WaitText());
 
+	}
+
+
+	// 왕관 씌우기, 빛나는 왕관 x
+	void CrownOn()
+	{
+		crown.SetActive(true);
+		shine_Crown.SetActive(false);
+	}
+
+	// 왕관 다 끄기. 실패 시 사용
+	void CrownOff()
+	{
+		crown.SetActive(false);
+		shine_Crown.SetActive(false);
+	}
+	// 빛나는 왕관만 키기
+	void ShineCrown()
+	{
+		crown.SetActive(false);
+		shine_Crown.SetActive(true);
 	}
 
 	// 안드로이드 앱 끝날 때 저장
