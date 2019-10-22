@@ -59,10 +59,20 @@ public class StatusCal : AI
 		}
 		else if (UInput.uIState == UInput.UIState.Ball)
 		{
+			if(success >= 10)
+			{
+				ShineCrown();
+			}
+			else if(success >=10)
+			{
+				CrownOn();
+			}
+
 			if (fail >= 1)
 			{
 				timing_menu.SetActive(false);
 				BallCal();
+				CrownOff();
 			}
 		}
 
@@ -130,13 +140,7 @@ public class StatusCal : AI
 			foodPoint -= (success + fail);
 			ballSuccess.SetActive(true);
 			SoundManager.s_Instance.Sound_EffectBallSuccess();
-			if(success >= 10)
-			{
-				ShineCrown();
-			}
-			else{
-				CrownOn();
-			}
+			
 		}
 		else
 		{
@@ -144,7 +148,6 @@ public class StatusCal : AI
 			foodPoint -= (success + fail);
 			ballFail.SetActive(true);
 			SoundManager.s_Instance.Sound_EffectBallFail();
-			CrownOff();
 		}
 
 		Save();
@@ -173,7 +176,7 @@ public class StatusCal : AI
 		crown.SetActive(true);
 		shine_Crown.SetActive(false);
 	}
-
+	
 	// 왕관 다 끄기. 실패 시 사용
 	void CrownOff()
 	{

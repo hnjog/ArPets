@@ -34,6 +34,7 @@ public class AIStateController : AI
 
 	[SerializeField] GameObject swimming = null;                 // 파티클
 
+
 	private void Start()
 	{
 		//깜짝 놀람 애니메이션 & 인사 하는 것

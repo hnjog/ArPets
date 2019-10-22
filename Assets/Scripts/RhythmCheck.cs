@@ -33,7 +33,7 @@ public class RhythmCheck : MonoBehaviour
 		//    input.once = true;
 
 		Debug.Log(big.rectTransform.sizeDelta.x);
-		if (big.rectTransform.sizeDelta.x <= 60 && big.rectTransform.sizeDelta.x >= 40)
+		if (big.rectTransform.sizeDelta.x <= 65 && big.rectTransform.sizeDelta.x >= 40)
 		{
 			rightTiming = true;
 			uuu.TimingOff();

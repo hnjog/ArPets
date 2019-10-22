@@ -101,7 +101,7 @@ public class UInput : MonoBehaviour
 		//	else{
 		//		StopCoroutine("CreditChecker");
 		//		CreditOff();
-		//		credit_Ani.Rebind();                            // 애니메이터 초기화
+		//		//credit_Ani.Rebind();                            // 애니메이터 초기화
 		//		uIState = UIState.menu;
 		//	}
 		//}
@@ -205,25 +205,28 @@ public class UInput : MonoBehaviour
 		switch (pEvent)
 		{
 			case VINPUT_EVENT.TAP_1FINGER:                          // 손가락 하나 탭
+				if (uIState == UIState.credit_m)                      // 인트로 상태일 경우 터치시 꺼준다.
+				{
+					StopCoroutine("CreditChecker");
+					CreditOff();
+					uIState = UIState.menu;
+					break;
+				}
 				if (isPlayBall == false && AIStateController.isAnimating == false)    // 공놀이 중이 아닐때, 애니메이션 재생 중이 아닐 때 메뉴 이용 가능
 				{
 					// 메뉴를 열 때 타임스케일 = 0
 					if (uIState == UIState.Idle)
 					{
-
 						Time.timeScale = 0f;
 						uIState = UIState.menu;
-
 						mAni.SetTrigger("yu");                          // 메뉴 등장
 					}
 					else if (uIState == UIState.Feed || uIState == UIState.Ball)
 					{
-
 						Time.timeScale = 0f;
 						back = uIState;                                   // 저장
 						uIState = UIState.play_m;
 						pmAni.SetTrigger("yu");                           // 메뉴 등장
-
 					}
 					else if (uIState == UIState.menu)                         // 메뉴 중에
 					{
@@ -278,13 +281,7 @@ public class UInput : MonoBehaviour
 				{
 					rhythm.CheckRhythm();                             // 리듬 체크
 				}
-				else if(uIState == UIState.credit_m)					  // 인트로 상태일 경우 터치시 꺼준다.
-				{
-					StopCoroutine("CreditChecker");
-					CreditOff();
-					credit_Ani.Rebind();						    // 애니메이터 초기화
-					uIState = UIState.menu;
-				}
+				
 				break;
 			case VINPUT_EVENT.TAP_2FINGER:                          // 손가락 두 개 탭
 				break;
@@ -361,7 +358,6 @@ public class UInput : MonoBehaviour
 				SoundManager.s_Instance.Sound_EffectMenuMove();
 				break;
 			case VINPUT_EVENT.SWIPE_UP_1FINGER:                     // 손가락 하나로 위로 스와이프
-
 				break;
 			case VINPUT_EVENT.SWIPE_DOWN_1FINGER:                  // 손가락 하나로 밑으로 스와이프
 				if(uIState == UIState.menu)
@@ -386,14 +382,12 @@ public class UInput : MonoBehaviour
 	//크레딧 재생확인 코루틴
 	IEnumerator CreditChecker()
 	{
-		Debug.Log("a3");
 		while(credit_Ani.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1f)
 		{
 			yield return null;
 		}
 		CreditOff();
 		uIState = UIState.menu;
-		Debug.Log("a4");
 		yield return null;
 	}
 

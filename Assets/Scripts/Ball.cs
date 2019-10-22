@@ -20,7 +20,7 @@ public class Ball : MonoBehaviour
 	[SerializeField] AIStateController aiState = null;         // aistatecontroller
 
 	Vector3 BallVelo;                       // 방향
-	float degree = 60f;                     // 던지는 각도
+	float degree = 65f;                     // 던지는 각도
 
 	[SerializeField] UInput input = null;
 	Transform caTF = null;
@@ -46,13 +46,14 @@ public class Ball : MonoBehaviour
 			ballHit = GameObject.Find("Particle").transform.Find("Ball");
 		}
 
-		// off 한 후의 힘 초기화  + new Vector3(0,4, veluga.transform.position.z * 2.5f) 
+		// off 한 후의 힘 초기화
 		b_rigid.velocity = Vector3.zero;
 		BallVelo = Throwing(transform.position, veluga.transform.position + Vector3.up * 0.5f, degree);
 		Throw(BallVelo);
 
 		if (UInput.uIState == UInput.UIState.Ball)
 		{
+			catchTF.position = new Vector3(0, 1, 1);
 			catchTF.SetParent(null);
 			aiState.StartCoroutine(aiState.BallBall());
 		}

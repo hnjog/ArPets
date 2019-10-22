@@ -15,6 +15,9 @@ public class AIEmotionController : AI
 	[SerializeField]
 	Renderer veluga_Renderer = null;                             // 벨루가 표정 렌더러
 
+	[SerializeField] GameObject happyOra = null;				// 행복오라(만복도, 행복도 80이상)
+	[SerializeField] GameObject sadOra = null;				    // 슬픔오라(만복도, 행복도 40이하)
+
 	//bool isStarting = true;                                         // 시작 중
 
 	private void Start()
@@ -59,6 +62,13 @@ public class AIEmotionController : AI
 				{
 					veluga_Emotion = Chara_Emotion.emotion_VeryAngry;
 				}
+			}
+
+			if (happiness >= 80 && foodPoint >= 80) happyOra.SetActive(true);
+			else if (happiness <= 40 && foodPoint <= 40) sadOra.SetActive(true);
+			else{
+				happyOra.SetActive(false);
+				sadOra.SetActive(false);
 			}
 
 			yield return null;
