@@ -19,7 +19,7 @@ public class Food : MonoBehaviour
 	GameObject obm = null;
 
 	[SerializeField] Transform foodParticle = null;
-	
+
 	// 작동 될 때
 	private void OnEnable()
 	{
@@ -36,7 +36,7 @@ public class Food : MonoBehaviour
 		}
 
 		uu.fakeFish.SetActive(false);
-		if (AI.success + AI.fail < 9 && UInput.uIState == UInput.UIState.Feed && Vector3.Distance(tf.transform.position, veTF.position) < 0.4f) // 벨루가위치와 던짐 목표 위치를 비교하여 일정 거리 이하일 경우만
+		if (AI.success + AI.fail < 5 && UInput.uIState == UInput.UIState.Feed && Vector3.Distance(tf.transform.position, veTF.position) < 0.4f) // 벨루가위치와 던짐 목표 위치를 비교하여 일정 거리 이하일 경우만
 		{
 			aiState.StartCoroutine(aiState.FeedFeed());
 		}
@@ -60,7 +60,7 @@ public class Food : MonoBehaviour
 			ObjectManager.instance.F_Recovery(gameObject);
 			AI.success++;
 
-			if (AI.success + AI.fail < 10)
+			if (AI.success + AI.fail < 5)
 			{
 				uu.fakeFish.SetActive(true);
 
@@ -73,7 +73,7 @@ public class Food : MonoBehaviour
 	{
 		yield return new WaitForSeconds(2.5f);
 		AI.fail++;
-		if (AI.success + AI.fail < 10) uu.fakeFish.SetActive(true);
+		if (AI.success + AI.fail < 5) uu.fakeFish.SetActive(true);
 		ObjectManager.instance.F_Recovery(gameObject);
 	}
 
@@ -97,7 +97,7 @@ public class Food : MonoBehaviour
 
 		float initialVelocity = (1 / Mathf.Cos(angle)) * Mathf.Sqrt((0.5f * gravity * Mathf.Pow(distance, 2)) / (distance * Mathf.Tan(angle) + yOffset));
 
-		Vector3 velocity = new Vector3(0f, initialVelocity * Mathf.Sin(angle), initialVelocity * Mathf.Cos(angle));
+		Vector3 velocity = new Vector3(0f, initialVelocity * Mathf.Sin(angle), initialVelocity * Mathf.Cos(angle));	// 던지는 강도를 1.3배로 - 도착 위치가 멀리감
 
 		float angleBetweenObjects = Vector3.Angle(Vector3.forward, vTarget - vPosition) * (targetPos.x > transformPos.x ? 1 : -1);
 		Vector3 finalVelocity = Quaternion.AngleAxis(angleBetweenObjects, Vector3.up) * velocity;

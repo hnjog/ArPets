@@ -13,18 +13,18 @@ public class Ball : MonoBehaviour
 {
 	Rigidbody b_rigid = null;               // 리지드바디
 
-	GameObject tf = null;                   // 던지는 곳
+	//GameObject tf = null;                   // 던지는 곳
 											//GameObject player = null;               // 플레이어
 	GameObject veluga = null;               // 벨루가
 
 	[SerializeField] AIStateController aiState = null;         // aistatecontroller
 
 	Vector3 BallVelo;                       // 방향
-	float degree = 65f;                     // 던지는 각도
+	float degree = 30f;                     // 던지는 각도
 
 	[SerializeField] UInput input = null;
-	Transform caTF = null;
-	Transform catchTF = null;
+	[SerializeField] Transform caTF = null;
+	//[SerializeField] GameObject catchTF = null;
 
 	[SerializeField] Transform ballHit = null;
 
@@ -35,14 +35,14 @@ public class Ball : MonoBehaviour
 		{
 			transform.SetParent(null);                              // 부모를 없애어, 플레이어의 시각으로부터 자유로워진다.
 			b_rigid = GetComponent<Rigidbody>();
-			tf = GameObject.Find("LookChecker");
-			tf.transform.SetParent(null);                           // 부모를 없애어, 플레이어가 어디를 보고 치던 벨루가에게 날아가도록 한다.
+			//tf = GameObject.Find("LookChecker");
+			//tf.transform.SetParent(null);                           // 부모를 없애어, 플레이어가 어디를 보고 치던 벨루가에게 날아가도록 한다.
 																	//player = GameObject.Find("Camera Container");
 			veluga = GameObject.Find("BelugaAxis");
 			aiState = GameObject.Find("BelugaAxis").GetComponent<AIStateController>();
 			input = GameObject.Find("Main Camera").GetComponent<UInput>();
 			caTF = GameObject.Find("Main Camera").GetComponent<Transform>();
-			catchTF = GameObject.Find("CatchPoint").GetComponent<Transform>();
+			//catchTF = GameObject.Find("CatchPoint");
 			ballHit = GameObject.Find("Particle").transform.Find("Ball");
 		}
 
@@ -53,23 +53,27 @@ public class Ball : MonoBehaviour
 
 		if (UInput.uIState == UInput.UIState.Ball)
 		{
-			catchTF.position = new Vector3(0, 1, 1);
-			catchTF.SetParent(null);
+			//catchTF.transform.position = caTF.position;
+			//catchTF.transform.SetParent(null);
 			aiState.StartCoroutine(aiState.BallBall());
+			StartCoroutine("DestroyBall");
 		}
+
+		
 
 	}
 
-	// 받아치는 함수, 타이밍 등의 조건 추가 예정임.(타이밍에 맞게 치지 못한 경우, fail 카운트가 늘어나 실패로 규정이 됨)
+	// 받아치는 함수, 타이밍 등의 조건 추가 예정임.(타이밍에 맞게 치지 못한 경우, fail 카운트가 늘어나 실패로 규정이 됨) - 중력에 따라서 유저가 받아 치더라도 벨루가에게 닿지 않는 경우가 있음.(그러므로 받아칠때도 코루틴을 멈추고 시작하게한다.)
 	public void Rebound()
 	{
 		AI.success++;
 		b_rigid.velocity = Vector3.zero;
-		BallVelo = Throwing(transform.position, veluga.transform.position, degree);
+		BallVelo = Throwing(transform.position, veluga.transform.position + Vector3.up * 0.5f, degree);
 		Throw(BallVelo);
-
+		input.TimingOff();
+		StopCoroutine("DestroyBall");
 		aiState.StartCoroutine(aiState.BallBall());
-
+		StartCoroutine("DestroyBall");
 	}
 
 	private void OnCollisionEnter(Collision other)
@@ -77,24 +81,25 @@ public class Ball : MonoBehaviour
 		Debug.Log(other.gameObject.tag);
 		if (other.gameObject.tag == "Pet")
 		{
+			StopCoroutine("DestroyBall");
 			input.TimingOn();
 			ballHit.gameObject.SetActive(true);
 			SoundManager.s_Instance.Sound_EffectBall();
 			b_rigid.velocity = Vector3.zero;
-			BallVelo = Throwing(transform.position, catchTF.position, degree);                 // 벨루가가 플레이어에게 볼을 던짐  + new Vector3(0, 0, veluga.transform.position.z * 2.5f)veluga.
+			BallVelo = Throwing(transform.position, caTF.transform.position, degree);                 // 벨루가가 플레이어에게 볼을 던짐  + new Vector3(0, 0, veluga.transform.position.z * 2.5f)veluga.
 			Throw(BallVelo);
 			StartCoroutine("DestroyBall");
 
 		}
-		else if (other.gameObject.name == "Main Camera")
-		{
-			Debug.Log(other.gameObject.name);
-			other.collider.enabled = false;
-			input.TimingOff();
-
-			StopCoroutine("DestroyBall");
-			Rebound();
-		}
+		//else if (other.gameObject.name == "Main Camera")
+		//{
+		//	Debug.Log(other.gameObject.name);
+		//	other.collider.enabled = false;
+		//	input.TimingOff();
+		//
+		//	StopCoroutine("DestroyBall");
+		//	//Rebound();
+		//}
 	}
 
 	// 유저가 볼을 타이밍에 못맞추고 놓친 경우 사라짐.
@@ -102,11 +107,11 @@ public class Ball : MonoBehaviour
 	{
 		yield return new WaitForSeconds(1.35f);
 		input.TimingOff();                    // 타이밍 메뉴 먼저 꺼줌
-		yield return new WaitForSeconds(0.6f);
+		yield return new WaitForSeconds(1.2f);
 		AI.fail++;
-		tf.transform.SetParent(caTF);
-		catchTF.SetParent(caTF);
-		catchTF.localPosition = new Vector3(0, 0, 0.5f);
+		//tf.transform.SetParent(caTF);
+		//catchTF.transform.SetParent(caTF);
+		//catchTF.transform.localPosition = new Vector3(0, 0, 0.5f);
 		ObjectManager.instance.B_Recovery(gameObject);
 	}
 

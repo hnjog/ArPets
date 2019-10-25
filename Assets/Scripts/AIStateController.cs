@@ -34,6 +34,7 @@ public class AIStateController : AI
 
 	[SerializeField] GameObject swimming = null;                 // 파티클
 
+	[SerializeField] Animator crown_ani;						 // 왕관 움직이게 하는 것
 
 	private void Start()
 	{
@@ -43,7 +44,13 @@ public class AIStateController : AI
 		StartCoroutine(StateChange());
 	}
 
-
+	//private void Update()
+	//{
+	//	if(Input.GetMouseButtonDown(0))
+	//	{
+	//		StartCoroutine(BallBall());
+	//	}
+	//}
 
 	// 공놀이 선택
 	public void UIBall()
@@ -214,16 +221,16 @@ public class AIStateController : AI
 		if (!isDoingFeed)
 		{
 			isDoingFeed = true;
-			veluga_Renderer.material.mainTexture = veluga_SFace[6];
+			veluga_Renderer.material.mainTexture = veluga_SFace[5];
 			veluga_Ani.SetTrigger("FeedFeed");
 			SoundManager.s_Instance.Sound_EffectFeed();
-			yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(1f);
 			veluga_Renderer.material.mainTexture = veluga_SFace[9];
-			yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(0.3f);
 			veluga_Renderer.material.mainTexture = veluga_SFace[6];
-			yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(0.3f);
 			veluga_Renderer.material.mainTexture = veluga_SFace[9];
-			yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(0.4f);
 			veluga_Renderer.material.mainTexture = veluga_SFace[5];
 			isDoingFeed = false;
 		}
@@ -238,6 +245,7 @@ public class AIStateController : AI
 			isDoingBall = true;
 			veluga_Renderer.material.mainTexture = veluga_SFace[8];
 			veluga_Ani.SetTrigger("BallBall");
+			crown_ani.SetTrigger("Crown");
 			SoundManager.s_Instance.Sound_EffectBall();
 			yield return new WaitForSecondsRealtime(2f);
 			veluga_Renderer.material.mainTexture = veluga_SFace[7];

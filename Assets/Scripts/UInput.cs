@@ -38,7 +38,8 @@ public class UInput : MonoBehaviour
 	byte menu_State = 1;                                        // 먹이주기, 돌아가기, 공놀이, 호출
 	byte pmenu_State = 1;                                       // 없음 , 돌아가기, 상태 취소, 없음
 
-	public static bool isPlayBall = false;     // 공놀이 중인가
+	public static bool isPlayBall = false;                     // 공놀이 중인가
+	bool feedCool = false;
 
 	[Header("공놀이 관련")]
 	Ball ballScript;
@@ -48,7 +49,9 @@ public class UInput : MonoBehaviour
 	bool oneBall = false;                                      // 공은 하나만
 
 	[SerializeField] GameObject[] filters = new GameObject[6]; // 선택된 것만 보이는 필터들
-	public static Transform lookCheckerTF = null;              // 보이는 곳 위치
+	[SerializeField] Transform lookCheckerTF = null;              // 보이는 곳 위치
+
+	int fTry = 0;
 
 	// UI 상태
 	public enum UIState
@@ -235,6 +238,7 @@ public class UInput : MonoBehaviour
 						{
 							AI.isStillMove = true;
 							aiState.UIFeed();
+							fTry = 0;
 							mAni.SetTrigger("mu");
 							fakeFish.SetActive(true);
 						}
@@ -252,6 +256,7 @@ public class UInput : MonoBehaviour
 						}
 						else if (menu_State == menu[3])                       // 호출 메뉴
 						{
+							//lookCheckerTF.localPosition = new Vector3(0, 0, 4.5f);
 							lookCheckerTF.SetParent(null);
 							AI.isStillMove = true;
 							aiState.UIIdle();
@@ -290,7 +295,12 @@ public class UInput : MonoBehaviour
 				{
 					aiState.veluga_Ani.SetInteger("FeedState", 1);
 					fakeFish.SetActive(false);
-					PlayFeed();
+					if (fTry < 5 && !feedCool)
+					{
+						feedCool = true;
+						PlayFeed();
+						StartCoroutine(FeedCoolCoru());
+					}
 				}
 				else if (uIState == UIState.Ball)
 				{
@@ -408,8 +418,9 @@ public class UInput : MonoBehaviour
 	// 먹이주기 함수, 오브젝트 매니저와 연계됨. 
 	void PlayFeed()
 	{
+		fTry++;
 		//게임 오브젝트 꺼내오고, 위치 수정
-		if (AI.success + AI.fail < 10)
+		if (AI.success + AI.fail < 5)
 		{
 			GameObject f_object = ObjectManager.instance.F_Expert();
 			f_object.transform.position = transform.position - (Vector3.up * 1);
@@ -420,6 +431,12 @@ public class UInput : MonoBehaviour
 	{
 		yield return new WaitForSecondsRealtime(6f);
 		isStarting = false;
+	}
+
+	IEnumerator FeedCoolCoru()
+	{
+		yield return new WaitForSecondsRealtime(2.2f);
+		feedCool = false;
 	}
 
 	// 호출용 15초 대기, 시간을 기다리는 중에 공놀이, 먹이 주기 선택 시 취소 된다.(어차피 그 쪽 스크립트 흐름대로 가도 isStillMove는 false로 변환됨)

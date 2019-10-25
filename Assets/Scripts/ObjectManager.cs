@@ -19,17 +19,17 @@ public class ObjectManager : MonoBehaviour
 	public Queue<GameObject> q_Food = new Queue<GameObject>();   // 먹이용 큐
 	public Queue<GameObject> q_Ball = new Queue<GameObject>();   // 공 큐
 
-	private void Start()
+	private void Awake()
 	{
 		instance = this;
 
 		//먹이 생성 10회
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 5; i++)
 		{
 			//위치와 각도는 변경 가능
 			GameObject f_object = Instantiate(ob_Food, transform.position, Quaternion.identity);
 			q_Food.Enqueue(f_object);
-			f_object.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
+			f_object.transform.rotation = Quaternion.Euler(new Vector3(270, 180, 0));
 			f_object.transform.SetParent(transform);
 			f_object.SetActive(false);
 		}

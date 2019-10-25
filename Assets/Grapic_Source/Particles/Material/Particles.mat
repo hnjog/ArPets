@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Particles
   m_Shader: {fileID: 4800000, guid: e6ed112f94dfaa5499de6dbeb552865e, type: 3}
-  m_ShaderKeywords: _BLENDMODE_BLEND _EMISSION
+  m_ShaderKeywords: USE_SOFT_PARTICLES _BLENDMODE_BLEND _EMISSION
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -48,7 +48,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 92c624ad09f9a3e44a6f95495e0b9bb2, type: 3}
+        m_Texture: {fileID: 2800000, guid: e976c6d3ebc1e4a85aa7186a3192d8c5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -106,7 +106,7 @@ Material:
     - _UseLighting: 0
     - _UseNoiseDistortion: 0
     - _UseParticlesAlphaCutout: 0
-    - _UseSoft: 0
+    - _UseSoft: 1
     - _UseSoftCutout: 0
     - _UseSoftInverted: 0
     - _UseVertexStreamRandom: 0
@@ -118,4 +118,4 @@ Material:
     - _DistortionSpeedScale: {r: 5, g: -5, b: 0.1, a: 0.1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TintColor: {r: 2.1185474, g: 0.6100529, b: 0.29948053, a: 1}
+    - _TintColor: {r: 6.653, g: 5.173278, b: 4.864222, a: 0.32941177}

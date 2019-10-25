@@ -28,7 +28,10 @@ public class StatusCal : AI
 
 	[Header("왕관")]
 	[SerializeField] GameObject crown = null;				// 5회 이상 10회 미만
-	[SerializeField] GameObject shine_Crown = null;			// 10회 이상일 시 
+	[SerializeField] GameObject shine = null;               // 10회 이상일 시 켜지는 파티클
+	bool isCrown = false;                                   // 왕관 스크립트 체크용
+	bool isShine = false;                                   // 반짝임 체크용
+	[SerializeField] Animator crown_Ani = null;				// 왕관 애니메이터
 
 	private void Awake()
 	{
@@ -52,27 +55,24 @@ public class StatusCal : AI
 	{
 		if (UInput.uIState == UInput.UIState.Feed)
 		{
-			if (success + fail >= 10)
+			if (success + fail >= 5)
 			{
 				FeedCal();
 			}
 		}
 		else if (UInput.uIState == UInput.UIState.Ball)
 		{
-			if(success >= 10)
+			if(success >= 5)
 			{
-				ShineCrown();
-			}
-			else if(success >=10)
-			{
-				CrownOn();
+				if (!isCrown) CrownOn();
+				else if (success >= 10 && !isShine) ShineOn();
 			}
 
 			if (fail >= 1)
 			{
 				timing_menu.SetActive(false);
 				BallCal();
-				CrownOff();
+				
 			}
 		}
 
@@ -157,6 +157,7 @@ public class StatusCal : AI
 		// 행복도 상승
 		if (checkHappy <= happiness)
 		{
+			crown_Ani.SetTrigger("Success");
 			aiState.StartCoroutine(aiState.State_Happy());
 		}
 		// 행복도 하락
@@ -166,28 +167,30 @@ public class StatusCal : AI
 		}
 
 		StartCoroutine(WaitText());
-
+		
 	}
 
 
 	// 왕관 씌우기, 빛나는 왕관 x
 	void CrownOn()
 	{
+		isCrown = true;
 		crown.SetActive(true);
-		shine_Crown.SetActive(false);
 	}
 	
 	// 왕관 다 끄기. 실패 시 사용
 	void CrownOff()
 	{
 		crown.SetActive(false);
-		shine_Crown.SetActive(false);
+		shine.SetActive(false);
+		isCrown = false;
+		isShine = false;
 	}
 	// 빛나는 왕관만 키기
-	void ShineCrown()
+	void ShineOn()
 	{
-		crown.SetActive(false);
-		shine_Crown.SetActive(true);
+		isShine = true;
+		shine.SetActive(true);
 	}
 
 	// 안드로이드 앱 끝날 때 저장
@@ -203,9 +206,17 @@ public class StatusCal : AI
 		{
 			yield return new WaitForSecondsRealtime(60f);
 			foodPoint -= 10;
-			Save();
 		}
 	}
+
+	//IEnumerator Crown()
+	//{
+	//	while(true)
+	//	{
+	//		
+	//		yield return null;
+	//	}
+	//}
 
 	// 저장 
 	public void Save()
@@ -247,5 +258,6 @@ public class StatusCal : AI
 		yield return new WaitForSecondsRealtime(3f);
 		ballSuccess.SetActive(false);
 		ballFail.SetActive(false);
+		CrownOff();
 	}
 }

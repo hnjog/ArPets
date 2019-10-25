@@ -34,6 +34,7 @@ public class AIMoveController : AI
 	Quaternion lc1, lc2;                            // 각도 조정용
 
 	[SerializeField] GameObject pointer = null;
+	[SerializeField] GameObject lookCheckerTF2 = null;
 
 	void Start()
 	{
@@ -84,9 +85,9 @@ public class AIMoveController : AI
 	// 일반 상태에서 벗어남 - 벨루가를 중앙에 강제위치 시키는 용도
 	void Returning()
 	{
-		if (Vector3.Distance(transform.position, UInput.lookCheckerTF.position) > 0.1f)
+		if (Vector3.Distance(transform.position, lookCheckerTF2.transform.position) > 0.1f)
 		{
-			lc1 = Quaternion.LookRotation(UInput.lookCheckerTF.position - transform.position);
+			lc1 = Quaternion.LookRotation(lookCheckerTF2.transform.position - transform.position);
 			transform.rotation = Quaternion.Slerp(transform.rotation, lc1, 0.3f);
 			transform.Translate(Vector3.forward * Time.deltaTime * moSpeed * 2);
 		}
@@ -180,7 +181,7 @@ public class AIMoveController : AI
 		// 임의의 쿼터니언 값을 가지게 함.
 		Quaternion qa = Quaternion.Euler(qx, qy, 0);
 
-		distance = Vector3.Distance(transform.position, UInput.lookCheckerTF.position);
+		distance = Vector3.Distance(transform.position, lookCheckerTF2.transform.position);
 
 
 
@@ -206,7 +207,7 @@ public class AIMoveController : AI
 				transform.rotation = Quaternion.Slerp(transform.rotation, qa, roSpeed);
 			else
 			{
-				Quaternion qb = Quaternion.LookRotation(UInput.lookCheckerTF.position - transform.position);
+				Quaternion qb = Quaternion.LookRotation(lookCheckerTF2.transform.position - transform.position);
 				transform.rotation = Quaternion.Slerp(transform.rotation, qb, roSpeed);
 			}
 		}

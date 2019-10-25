@@ -13,18 +13,33 @@ using UnityEngine.UI;
 public class RhythmCheck : MonoBehaviour
 {
 
-	[SerializeField] BoxCollider playerCollider = null; // 플레이어의 박스 콜라이더
+	//[SerializeField] BoxCollider playerCollider = null; // 플레이어의 박스 콜라이더
 
 	[Header("이미지 및 크기 관련")]
 	[SerializeField] Image big = null;
 	[SerializeField] GameObject count = null;
 	[SerializeField] UInput uuu = null;
+	[SerializeField] Ball ball;
 
 	//[SerializeField] AIStateController aistate = null;
 
 	bool rightTiming = false;
+	bool doubleNot = false;
 
 	// 일정 크기 사이면 타이밍 체크 성공
+
+	private void Start()
+	{
+		ball = GameObject.Find("ObjectManager").transform.Find("BeachBall(Clone)").GetComponent<Ball>();
+	}
+
+	private void Update()
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			CheckRhythm();
+		}
+	}
 
 	public void CheckRhythm()
 	{
@@ -53,17 +68,24 @@ public class RhythmCheck : MonoBehaviour
 		{
 			Debug.Log("on");
 			count.SetActive(true);
-			count.GetComponent<Text>().text = "" + (AI.success + 1);
-			playerCollider.enabled = true;
+			// 빠르게 두번 터치시 나타나는 문제를 방지하기 위함
+			if (!doubleNot)
+			{
+				count.GetComponent<Text>().text = "" + (AI.success + 1);
+				//playerCollider.enabled = true;
+				ball.Rebound();
+			}
 			StartCoroutine(PutOut());               //1초 후에 다시 꺼준다.
 		}
 	}
 
 	public IEnumerator PutOut()
 	{
+		doubleNot = true;
 		yield return new WaitForSeconds(1f);
 		//input.once = false;                         // 다시 사용할 수 있게 해준다.
 		count.SetActive(false);
-		playerCollider.enabled = false;
+		//playerCollider.enabled = false;
+		doubleNot = false;
 	}
 }
